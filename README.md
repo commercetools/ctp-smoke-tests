@@ -1,1 +1,2 @@
 # ctp-smoke-tests
+test
