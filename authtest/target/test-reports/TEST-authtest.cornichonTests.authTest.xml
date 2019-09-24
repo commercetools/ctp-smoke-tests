@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuite hostname="tests-MacBook-Pro" name="authtest.cornichonTests.authTest" tests="1" errors="0" failures="1" skipped="0" time="0.0" timestamp="2019-09-23T10:20:40">
+                     <properties>
+      <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/><property name="java.specification.version" value="11"/><property name="sun.cpu.isalist" value=""/><property name="sun.jnu.encoding" value="UTF-8"/><property name="sun.arch.data.model" value="64"/><property name="sbt.supershell" value="false"/><property name="java.vendor.url" value="https://www.jetbrains.com/"/><property name="sun.boot.library.path" value="/Applications/IntelliJ IDEA CE.app/Contents/jbr/Contents/Home/lib"/><property name="sun.java.command" value="/Users/abityukov/Library/Application Support/IdeaIC2019.2/Scala/launcher/sbt-launch.jar --addPluginSbtFile=/private/var/folders/ph/kl0t03f550s56y3m_rl16qlm0000gp/T/idea1.sbt ; set ideaPort in Global := 51350 ; idea-shell"/><property name="jdk.debug" value="release"/><property name="java.specification.vendor" value="Oracle Corporation"/><property name="java.version.date" value="2019-04-16"/><property name="java.home" value="/Applications/IntelliJ IDEA CE.app/Contents/jbr/Contents/Home"/><property name="file.separator" value="/"/><property name="java.vm.compressedOopsMode" value="Zero based"/><property name="line.separator" value="
+"/><property name="java.specification.name" value="Java Platform API Specification"/><property name="java.vm.specification.vendor" value="Oracle Corporation"/><property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/><property name="java.runtime.version" value="11.0.3+12-b304.56"/><property name="user.name" value="abityukov"/><property name="log4j.ignoreTCL" value="true"/><property name="file.encoding" value="UTF-8"/><property name="jnidispatch.path" value="/var/folders/ph/kl0t03f550s56y3m_rl16qlm0000gp/T/jna-1902222698/jna624679843786045196.tmp"/><property name="jna.loaded" value="true"/><property name="java.io.tmpdir" value="/var/folders/ph/kl0t03f550s56y3m_rl16qlm0000gp/T/"/><property name="java.version" value="11.0.3"/><property name="java.vm.specification.name" value="Java Virtual Machine Specification"/><property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/><property name="sun.os.patch.level" value="unknown"/><property name="java.library.path" value="/Users/abityukov/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/><property name="java.vendor" value="JetBrains s.r.o"/><property name="sun.io.unicode.encoding" value="UnicodeBig"/><property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="gopherProxySet" value="false"/><property name="java.class.path" value="/Users/abityukov/Library/Application Support/IdeaIC2019.2/Scala/launcher/sbt-launch.jar"/><property name="java.vm.vendor" value="JetBrains s.r.o"/><property name="jline.shutdownhook" value="false"/><property name="user.timezone" value="Europe/Berlin"/><property name="os.name" value="Mac OS X"/><property name="java.vm.specification.version" value="11"/><property name="sun.java.launcher" value="SUN_STANDARD"/><property name="user.country" value="DE"/><property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="sun.cpu.endian" value="little"/><property name="user.home" value="/Users/abityukov"/><property name="user.language" value="en"/><property name="swoval.tmpdir" value="/Users/abityukov/.sbt/1.0"/><property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/><property name="jline.esc.timeout" value="0"/><property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="path.separator" value=":"/><property name="os.version" value="10.14.6"/><property name="jna.nosys" value="true"/><property name="java.runtime.name" value="OpenJDK Runtime Environment"/><property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/><property name="jna.platform.library.path" value="/usr/lib:/usr/lib"/><property name="java.vendor.url.bug" value="https://youtrack.jetbrains.com"/><property name="user.dir" value="/Users/abityukov/smokeTests/authtest"/><property name="os.arch" value="x86_64"/><property name="idea.managed" value="true"/><property name="java.vm.info" value="mixed mode"/><property name="java.vm.version" value="11.0.3+12-b304.56"/><property name="java.class.version" value="55.0"/>
+    </properties>
+                     <testcase classname="authtest.cornichonTests.authTest" name="(It is not a test it is a sbt.testing.SuiteSelector)" time="0.0">
+                                                 <failure message="Cannot convert configuration to a authtest.cornichonTests.Config. Failures are:
+  - (file:/Users/abityukov/smokeTests/authtest/target/scala-2.12/test-classes/application.conf:6) Unable to parse the configuration: Could not resolve substitution to a value: ${PROJECT_KEY}.
+" type="pureconfig.error.ConfigReaderException">pureconfig.error.ConfigReaderException: Cannot convert configuration to a authtest.cornichonTests.Config. Failures are:
+  - (file:/Users/abityukov/smokeTests/authtest/target/scala-2.12/test-classes/application.conf:6) Unable to parse the configuration: Could not resolve substitution to a value: ${PROJECT_KEY}.
+
+	at pureconfig.ConfigSource.loadOrThrow(ConfigSource.scala:80)
+	at pureconfig.ConfigSource.loadOrThrow$(ConfigSource.scala:77)
+	at pureconfig.ConfigSource$$anon$2.loadOrThrow(ConfigSource.scala:315)
+	at authtest.cornichonTests.FeatureConfig.configuration(FeatureConfig.scala:15)
+	at authtest.cornichonTests.FeatureConfig.configuration$(FeatureConfig.scala:15)
+	at authtest.cornichonTests.authTest.configuration$lzycompute(authTest.scala:4)
+	at authtest.cornichonTests.authTest.configuration(authTest.scala:4)
+	at authtest.cornichonTests.authTest.feature(authTest.scala:9)
+	at com.github.agourlay.cornichon.framework.CornichonFeatureTask.$anonfun$loadAndExecuteFeature$1(CornichonFeatureTask.scala:27)
+	at cats.syntax.EitherObjectOps$.catchNonFatal$extension(either.scala:329)
+	at com.github.agourlay.cornichon.framework.CornichonFeatureTask.loadAndExecuteFeature(CornichonFeatureTask.scala:27)
+	at com.github.agourlay.cornichon.framework.CornichonFeatureTask.execute(CornichonFeatureTask.scala:19)
+	at sbt.TestRunner.runTest$1(TestFramework.scala:139)
+	at sbt.TestRunner.run(TestFramework.scala:154)
+	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.$anonfun$apply$1(TestFramework.scala:317)
+	at sbt.TestFramework$.sbt$TestFramework$$withContextLoader(TestFramework.scala:277)
+	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.apply(TestFramework.scala:317)
+	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.apply(TestFramework.scala:317)
+	at sbt.TestFunction.apply(TestFramework.scala:329)
+	at sbt.Tests$.$anonfun$toTask$1(Tests.scala:311)
+	at sbt.std.Transform$$anon$3.$anonfun$apply$2(Transform.scala:46)
+	at sbt.std.Transform$$anon$4.work(Transform.scala:67)
+	at sbt.Execute.$anonfun$submit$2(Execute.scala:280)
+	at sbt.internal.util.ErrorHandling$.wideConvert(ErrorHandling.scala:19)
+	at sbt.Execute.work(Execute.scala:289)
+	at sbt.Execute.$anonfun$submit$1(Execute.scala:280)
+	at sbt.ConcurrentRestrictions$$anon$4.$anonfun$submitValid$1(ConcurrentRestrictions.scala:178)
+	at sbt.CompletionService$$anon$2.call(CompletionService.scala:37)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+</failure>
+                                               </testcase>
+                     <system-out><![CDATA[]]></system-out>
+                     <system-err><![CDATA[]]></system-err>
+                   </testsuite>

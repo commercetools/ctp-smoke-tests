@@ -1,0 +1,25 @@
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [root / Test / test] Found inputs: /Users/abityukov/smokeTests/authtest/*.{java,scala},/Users/abityukov/smokeTests/authtest/src/main/java/**/*.{java,scala},/Users/abityukov/smokeTests/authtest/src/main/resources/**/*,/Users/abityukov/smokeTests/authtest/src/main/scala/**/*.{java,scala},/Users/abityukov/smokeTests/authtest/src/main/scala-2.12/**/*.{java,scala},/Users/abityukov/smokeTests/authtest/src/test/java/**/*.{java,scala},/Users/abityukov/smokeTests/authtest/src/test/resources/**/*,/Users/abityukov/smokeTests/authtest/src/test/scala/**/*.{java,scala},/Users/abityukov/smokeTests/authtest/src/test/scala-2.12/**/*.{java,scala}[0m
+[0m[[0m[0minfo[0m] [0m[0m1. Monitoring source files for root/test...[0m
+[0m[[0m[0minfo[0m] [0m[0m   Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mroot / Test / test - Accepted event for /Users/abityukov/smokeTests/authtest/src/test/resources/application.conf[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/Users/abityukov/smokeTests/authtest/src/test/resources/application.conf,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /Users/abityukov/smokeTests/authtest/src/test/resources/application.conf[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /Users/abityukov/smokeTests/authtest/src/test/resources/application.conf[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /Users/abityukov/smokeTests/authtest/src/test/resources/application.conf (previous stamp: Hash(12d27e74b581da1e39df0cd7c590519b58576912), current stamp: Hash(83bcfecc3d2f7f6e471664e9a6672b41f872bfd6))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /Users/abityukov/smokeTests/authtest/src/test/resources/application.conf -> Trigger. Returning: (Update(/Users/abityukov/smokeTests/authtest/src/test/resources/application.conf, 2019-Sep-23 10:13:43.741 CET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /Users/abityukov/smokeTests/authtest/src/test/resources/application.conf. Running 'test'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/Users/abityukov/smokeTests/authtest/src/test/resources/application.conf, 2019-Sep-23 10:13:43.741 CET).[0m
+[0m[[0m[0minfo[0m] [0m[0m2. Monitoring source files for root/test...[0m
+[0m[[0m[0minfo[0m] [0m[0m   Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mroot / Test / test - Accepted event for /Users/abityukov/smokeTests/authtest/src/test/resources/application.conf[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/Users/abityukov/smokeTests/authtest/src/test/resources/application.conf,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /Users/abityukov/smokeTests/authtest/src/test/resources/application.conf[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /Users/abityukov/smokeTests/authtest/src/test/resources/application.conf[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /Users/abityukov/smokeTests/authtest/src/test/resources/application.conf (previous stamp: Hash(83bcfecc3d2f7f6e471664e9a6672b41f872bfd6), current stamp: Hash(fe3a6969877e860a25d0b3acd900325e8ddf5fea))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /Users/abityukov/smokeTests/authtest/src/test/resources/application.conf -> Trigger. Returning: (Update(/Users/abityukov/smokeTests/authtest/src/test/resources/application.conf, 2019-Sep-23 10:15:02.135 CET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /Users/abityukov/smokeTests/authtest/src/test/resources/application.conf. Running 'test'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/Users/abityukov/smokeTests/authtest/src/test/resources/application.conf, 2019-Sep-23 10:15:02.135 CET).[0m
+[0m[[0m[0minfo[0m] [0m[0m3. Monitoring source files for root/test...[0m
+[0m[[0m[0minfo[0m] [0m[0m   Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received input event: Run().[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received input event: Run().[0m

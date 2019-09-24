@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="sbt: io.monix:monix-eval_2.12:3.0.0-RC5:jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/monix/monix-eval_2.12/3.0.0-RC5/monix-eval_2.12-3.0.0-RC5.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/monix/monix-eval_2.12/3.0.0-RC5/monix-eval_2.12-3.0.0-RC5-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/monix/monix-eval_2.12/3.0.0-RC5/monix-eval_2.12-3.0.0-RC5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
