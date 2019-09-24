@@ -1,1 +1,0 @@
-["sbt.Task[scala.collection.immutable.Map[java.lang.String, scala.collection.Seq[scala.Tuple2[java.nio.file.Path, sbt.nio.FileStamp]]]]",{"2.12.8":{"hashes":[["/Users/abityukov/ctp-smoke-tests/authtest/project/Dependencies.scala","1df082ad9e79d1bed31379c2485f54bc38a9a50d"]],"lastModifiedTimes":[]}}]
