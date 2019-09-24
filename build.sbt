@@ -13,3 +13,4 @@ lazy val root = (project in file("."))
       Nil
       ) map ( _ % Test))
     testFrameworks += new TestFramework ("com.github.agourlay.cornichon.framework.CornichonFramework")
+

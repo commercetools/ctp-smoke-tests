@@ -1,7 +1,7 @@
 package cornichonTests
 import com.github.agourlay.cornichon.CornichonFeature
 
-class authTest extends CornichonFeature with FeatureConfig {
+class AuthTest extends CornichonFeature with FeatureConfig {
   def feature = Feature("checking the API request"){
     Scenario("API request returns 200"){
 
@@ -15,3 +15,4 @@ class authTest extends CornichonFeature with FeatureConfig {
     }
   }
 }
+

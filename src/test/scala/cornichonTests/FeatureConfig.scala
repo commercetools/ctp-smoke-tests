@@ -16,3 +16,4 @@ trait FeatureConfig {
   lazy val projectKey = configuration.projectKey
   def authUrl:Refined[String, Url] = configuration.authUrl
 }
+
