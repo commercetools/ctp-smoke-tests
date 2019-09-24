@@ -11,9 +11,9 @@ project-key: ${PROJECT_KEY}
 ```
 
 ## External libraries
-*[Cornichon](https://github.com/agourlay/cornichon)
-*[Refined](https://github.com/fthomas/refined)
-*[Pureconfig](com.github.pureconfig)
+* [Cornichon](https://github.com/agourlay/cornichon)
+* [Refined](https://github.com/fthomas/refined)
+* [Pureconfig](https://github.com/pureconfig/pureconfig/)
 
 
 
