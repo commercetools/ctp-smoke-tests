@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="inc_compile_2.12">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/authtest/target/streams/test/compileIncSetup/_global/streams/inc_compile_2.12.zip!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
