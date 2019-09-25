@@ -12,5 +12,5 @@ lazy val root = (project in file("."))
       "com.github.pureconfig" %% "pureconfig"               % "0.12.0" ::
       Nil
       ) map ( _ % Test))
-    testFrameworks += new TestFramework ("com.github.agourlay.cornichon.framework.CornichonFramework")
+testFrameworks += new TestFramework ("com.github.agourlay.cornichon.framework.CornichonFramework")
 
