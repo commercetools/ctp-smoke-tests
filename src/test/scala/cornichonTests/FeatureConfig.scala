@@ -1,5 +1,7 @@
 package cornichonTests
+
 import eu.timepit.refined.api.Refined
+import eu.timepit.refined.pureconfig._
 import eu.timepit.refined.string.Url
 import pureconfig._
 import pureconfig.generic.auto._

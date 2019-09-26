@@ -9,6 +9,7 @@ lazy val root = (project in file("."))
     libraryDependencies ++= (
       "com.github.agourlay"   %% "cornichon-test-framework" % "0.18.1" ::
       "eu.timepit"            %% "refined"                  % "0.9.10" ::
+      "eu.timepit"            %% "refined-pureconfig"       % "0.9.10" ::
       "com.github.pureconfig" %% "pureconfig"               % "0.12.0" ::
       Nil
       ) map ( _ % Test))
