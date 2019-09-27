@@ -5,9 +5,11 @@ class AuthTest extends CornichonFeature with FeatureConfig {
   def feature = Feature("checking the API request"){
     Scenario("API request returns 200"){
 
-      WithBasicAuth (configuration.clientId,configuration.clientSecret){
-        When I post(s"$authUrl")
-        .withParams("grant_type" -> "client_credentials", "scope" -> s"manage_project:$projectKey")
+      WithBasicAuth (clientId,clientSecret){
+        When I post(s"${authUrl}")
+        .withParams(
+          "grant_type" -> "client_credentials",
+          "scope" -> s"manage_project:${projectKey}")
 
         Then assert status.is(200)
         And I show_last_body_json
