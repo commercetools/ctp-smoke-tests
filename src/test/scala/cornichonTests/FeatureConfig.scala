@@ -20,3 +20,4 @@ trait FeatureConfig {
   lazy val authUrl = configuration.authUrl.value
   lazy val projectKey = configuration.projectKey
 }
+

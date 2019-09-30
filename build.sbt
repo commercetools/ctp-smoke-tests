@@ -17,3 +17,4 @@ lazy val root = (project in file("."))
 
 testFrameworks += new TestFramework("com.github.agourlay.cornichon.framework.CornichonFramework")
 scalacOptions += "-Xmacro-settings:materialize-derivations"
+

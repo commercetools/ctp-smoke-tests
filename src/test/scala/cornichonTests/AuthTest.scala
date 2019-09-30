@@ -16,3 +16,4 @@ class AuthTest extends CornichonFeature with FeatureConfig {
     }
   }
 }
+
