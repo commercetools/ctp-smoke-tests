@@ -1,4 +1,5 @@
 package cornichonTests
+
 import com.github.agourlay.cornichon.CornichonFeature
 
 class AuthTest extends CornichonFeature with FeatureConfig {
@@ -7,9 +8,7 @@ class AuthTest extends CornichonFeature with FeatureConfig {
 
       WithBasicAuth(clientId, clientSecret) {
         When I post(authUrl)
-        .withParams(
-          "grant_type" -> "client_credentials",
-          "scope" -> s"manage_project:${projectKey}")
+          .withParams("grant_type" -> "client_credentials", "scope" -> s"manage_project:${projectKey}")
 
         Then assert status.is(200)
         And I show_last_body_json
@@ -17,4 +16,3 @@ class AuthTest extends CornichonFeature with FeatureConfig {
     }
   }
 }
-
