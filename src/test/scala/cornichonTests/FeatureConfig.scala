@@ -7,10 +7,10 @@ import pureconfig.generic.auto._
 import pureconfig._
 
 case class Config(
-  authUrl: String Refined Url,
-  clientId: String,
-  clientSecret: String,
-  projectKey: String,
+    authUrl: String Refined Url,
+    clientId: String,
+    clientSecret: String,
+    projectKey: String,
 )
 
 trait FeatureConfig {
@@ -20,4 +20,3 @@ trait FeatureConfig {
   lazy val authUrl = configuration.authUrl.value
   lazy val projectKey = configuration.projectKey
 }
-
