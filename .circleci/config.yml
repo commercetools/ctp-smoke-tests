@@ -1,0 +1,25 @@
+version: 2.1
+
+aliases:
+  - &working_directory ~/ctp-smoke-tests
+
+executors:
+  sbt-executor:
+    working_directory: *working_directory
+    docker:
+      - image: openlaw/scala-builder
+
+jobs:
+  auth-test-job:
+    executor: sbt-executor
+    steps:
+      - checkout
+      - run:
+        shell: bin/zsh
+        command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean test exit
+
+workflows:
+  version: 2.1
+  authtest:
+    jobs:
+      - auth-test-job
