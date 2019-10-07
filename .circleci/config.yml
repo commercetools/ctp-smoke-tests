@@ -15,11 +15,11 @@ jobs:
     steps:
       - checkout
       - run:
-        shell: bin/zsh
-        command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean exit
+          name: Compile smoke tests
+          command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean exit
 
 workflows:
-  version: 2
+  version: 2.1
   build:
     jobs:
       - compile
