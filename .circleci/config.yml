@@ -10,16 +10,15 @@ executors:
       - image: openlaw/scala-builder
 
 jobs:
-  auth-test-job:
+  compile:
     executor: sbt-executor
     steps:
       - checkout
       - run:
         shell: bin/zsh
-        command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean test exit
+        command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean exit
 
 workflows:
-  version: 2.1
-  authtest:
+  build:
     jobs:
-      - auth-test-job
+      - compile
