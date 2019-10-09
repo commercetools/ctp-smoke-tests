@@ -5,18 +5,39 @@ aliases:
 
 executors:
   sbt-executor:
-    working_directory: *working_directory
     docker:
       - image: openlaw/scala-builder
+    working_directory: *working_directory
 
 jobs:
   compile:
     executor: sbt-executor
     steps:
       - checkout
+       
+      #git and sbt caching
+      - restore_cache:
+          keys:
+            - source-v1-{{ .Branch }}-{{ .Revision }}
+            - source-v1-{{ .Branch }}-
+            - source-v1-
+            - sbt-cache
+          
       - run:
           name: Compile smoke tests
           command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean exit
+       
+      #git and sbt caching
+      - save_cache:
+          key: source-v1-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ".git"
+      - save_cache:
+          key: sbt-cache
+          paths:
+            - "~/.ivy2/cache"
+            - "~/.sbt"
+            - "~/.m2"
 
 workflows:
   version: 2.1
