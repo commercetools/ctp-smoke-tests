@@ -27,9 +27,6 @@ jobs:
           name: Compile smoke tests
           command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean exit
        
-      #git garbage collection 
-      - run: git gc --quiet
-
       #git and sbt caching
       - save_cache:
           key: source-v1-{{ .Branch }}-{{ .Revision }}
