@@ -2,12 +2,19 @@ version: 2.1
 
 aliases:
   - &working_directory ~/ctp-smoke-tests
+  - &test_env_vars
+    AUTH_URL: auth_url
+    CLIENT_ID: client_id
+    CLIENT_SECRET: client_secret
+    PROJECT_KEY: project_key
 
 executors:
   sbt-executor:
     docker:
       - image: openlaw/scala-builder
     working_directory: *working_directory
+    environment:
+      <<: *test_env_vars
 
 jobs:
   compile:
@@ -25,7 +32,7 @@ jobs:
           
       - run:
           name: Compile smoke tests
-          command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean exit
+          command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean test exit
        
       #git and sbt caching
       - save_cache:
