@@ -3,10 +3,10 @@ version: 2.1
 aliases:
   - &working_directory ~/ctp-smoke-tests
   - &test_env_vars
-    AUTH_URL: auth_url
-    CLIENT_ID: client_id
-    CLIENT_SECRET: client_secret
-    PROJECT_KEY: project_key
+    AUTH_URL: authUrl
+    CLIENT_ID: clientId
+    CLIENT_SECRET: clientSecret
+    PROJECT_KEY: projectKey
 
 executors:
   sbt-executor:
