@@ -2,20 +2,13 @@ version: 2.1
 
 aliases:
   - &working_directory ~/ctp-smoke-tests
-  - &test_env_vars
-    AUTH_URL: authUrl
-    CLIENT_ID: clientId
-    CLIENT_SECRET: clientSecret
-    PROJECT_KEY: projectKey
-
+  
 executors:
   sbt-executor:
     docker:
       - image: openlaw/scala-builder
     working_directory: *working_directory
-    environment:
-      <<: *test_env_vars
-
+    
 jobs:
   compile:
     executor: sbt-executor
