@@ -10,7 +10,7 @@ executors:
     working_directory: *working_directory
     
 jobs:
-  compile:
+  smoke_tests:
     executor: sbt-executor
     steps:
       - checkout
@@ -24,7 +24,7 @@ jobs:
             - sbt-cache
           
       - run:
-          name: Compile smoke tests
+          name: Smoke tests
           command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean test exit
        
       #git and sbt caching
@@ -43,4 +43,4 @@ workflows:
   version: 2.1
   build:
     jobs:
-      - compile
+      - smoke_tests
