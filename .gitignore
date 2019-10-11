@@ -4,3 +4,5 @@ target
 logs
 .java-version
 .DS_Store
+*.swp
+*~
