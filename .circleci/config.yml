@@ -2,7 +2,29 @@ version: 2.1
 
 aliases:
   - &working_directory ~/ctp-smoke-tests
-  
+
+  - &save-git-cache
+    key: source-v1-{{ .Branch }}-{{ .Revision }}
+    paths:
+      - ".git"
+
+  - &restore-git-cache 
+    keys:
+      - source-v1-{{ .Branch }}-{{ .Revision }}
+      - source-v1-{{ .Branch }}-
+      - source-v1-
+
+  - &save-sbt-cache
+    key: sbt-cache
+    paths:
+      - "~/.sbt"
+      - "~/.ivy2/cache"
+      - "~/.m2"
+
+  - &restore-sbt-cache
+    keys:
+      - sbt-cache
+      
 executors:
   sbt-executor:
     docker:
@@ -14,31 +36,14 @@ jobs:
     executor: sbt-executor
     steps:
       - checkout
-       
-      #git and sbt caching
-      - restore_cache:
-          keys:
-            - source-v1-{{ .Branch }}-{{ .Revision }}
-            - source-v1-{{ .Branch }}-
-            - source-v1-
-            - sbt-cache
-          
+      - restore_cache: *restore-git-cache
+      - restore_cache: *restore-sbt-cache
       - run:
           name: Compile smoke tests
           command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean test exit
-       
-      #git and sbt caching
-      - save_cache:
-          key: source-v1-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - ".git"
-      - save_cache:
-          key: sbt-cache
-          paths:
-            - "~/.ivy2/cache"
-            - "~/.sbt"
-            - "~/.m2"
-
+      - save_cache: *save-git-cache
+      - save_cache: *save-sbt-cache
+                     
 workflows:
   version: 2.1
   build:
