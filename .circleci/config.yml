@@ -10,11 +10,11 @@ executors:
     working_directory: *working_directory
 
 jobs:
-  compile:
+  smoke_tests:
     executor: sbt-executor
     steps:
       - checkout
-       
+
       #git and sbt caching
       - restore_cache:
           keys:
@@ -22,11 +22,11 @@ jobs:
             - source-v1-{{ .Branch }}-
             - source-v1-
             - sbt-cache
-          
+
       - run:
-          name: Compile smoke tests
-          command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean exit
-       
+          name: Smoke tests
+          command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean test exit
+
       #git and sbt caching
       - save_cache:
           key: source-v1-{{ .Branch }}-{{ .Revision }}
@@ -43,4 +43,4 @@ workflows:
   version: 2.1
   build:
     jobs:
-      - compile
+      - smoke_tests
