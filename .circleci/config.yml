@@ -2,19 +2,19 @@ version: 2.1
 
 aliases:
   - &working_directory ~/ctp-smoke-tests
-  
+
 executors:
   sbt-executor:
     docker:
       - image: openlaw/scala-builder
     working_directory: *working_directory
-    
+
 jobs:
   smoke_tests:
     executor: sbt-executor
     steps:
       - checkout
-       
+
       #git and sbt caching
       - restore_cache:
           keys:
@@ -22,11 +22,11 @@ jobs:
             - source-v1-{{ .Branch }}-
             - source-v1-
             - sbt-cache
-          
+
       - run:
           name: Smoke tests
           command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean test exit
-       
+
       #git and sbt caching
       - save_cache:
           key: source-v1-{{ .Branch }}-{{ .Revision }}
