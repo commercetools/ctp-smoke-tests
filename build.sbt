@@ -1,19 +1,54 @@
-ThisBuild / scalaVersion := "2.12.10"
-ThisBuild / version := "0.1.0-SNAPSHOT"
-ThisBuild / organization := "com.commercetools"
+ThisBuild / scalaVersion     := "2.12.10"
+ThisBuild / version          := "0.1.0-SNAPSHOT"
+ThisBuild / organization     := "com.commercetools"
 ThisBuild / organizationName := "commercetools"
 
+import Dependencies._
+import NativePackagerHelper._
+
 lazy val root = (project in file("."))
+  .enablePlugins(JavaAppPackaging, DockerPlugin)
   .settings(
-    name := "authTest",
-    libraryDependencies ++= (
-      "com.github.agourlay"     %% "cornichon-test-framework" % "0.18.1" ::
-        "eu.timepit"            %% "refined"                  % "0.9.10" ::
-        "eu.timepit"            %% "refined-pureconfig"       % "0.9.10" ::
-        "com.github.pureconfig" %% "pureconfig"               % "0.12.0" ::
-        Nil
-    ) map (_ % Test)
+    name := "smoke-tests",
+    libraryDependencies ++= smokeTests,
+    scalacOptions += "-Xmacro-settings:materialize-derivations",
+    mainClass in Compile := Some("org.scalatest.tools.Runner"),
+
+    scriptClasspath ++= {
+      fromClasspath((managedClasspath in Test).value, ".", _ => true).map(_._2) :+
+        (sbt.Keys.`package` in Test).value.getName
+    },
+
+    mappings in Universal ++= {
+      val testJar = (sbt.Keys.`package` in Test).value
+      val func = testJar -> s"lib/${testJar.getName}"
+      fromClasspath((managedClasspath in Test).value, "lib", _ => true) :+
+       (testJar -> s"lib/${testJar.getName}")
+    },
+
+    noPackageDoc,
+//    dockerSettings,
+//    dockerPublishingSettings,
+
+    dockerCmd := Seq(
+      "-u",
+      "/tmp/test-results",
+      "-R",
+      s"lib/${(artifactPath in (Test, packageBin)).value.getName}",
+      "-P", // tests in parallel: http://www.scalatest.org/user_guide/using_the_runner#executingSuitesInParallel
+      "-oDI" // standard output: D - show all durations, I - show reminder of failed and canceled tests without stack traces
+    ),
+    packageName in Docker := "ctp-smoke-tests"
   )
 
-testFrameworks += new TestFramework("com.github.agourlay.cornichon.framework.CornichonFramework")
-scalacOptions += "-Xmacro-settings:materialize-derivations"
+//skip javadoc.jar build for performance
+lazy val noPackageDoc = Seq(mappings in (Compile, packageDoc) := Seq())
+
+//lazy val dockerSettings = Seq(
+//  maintainer in Docker := "",
+//  dockerBaseImage := ""
+//)
+//lazy val dockerPublishingSettings = Seq(
+//  dockerRepository := Some(""),
+//  dockerUpdateLatest := true
+//)
