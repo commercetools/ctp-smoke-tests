@@ -9,9 +9,9 @@ import NativePackagerHelper._
 lazy val root = (project in file("."))
   .enablePlugins(JavaAppPackaging, DockerPlugin)
   .settings(
-    name := "smoke-tests",
-    libraryDependencies ++= smokeTests,
-    scalacOptions += "-Xmacro-settings:materialize-derivations",
+    name                 := "smoke-tests",
+    libraryDependencies  ++= smokeTests,
+    scalacOptions        += "-Xmacro-settings:materialize-derivations",
     mainClass in Compile := Some("org.scalatest.tools.Runner"),
 
     scriptClasspath ++= {
@@ -23,13 +23,10 @@ lazy val root = (project in file("."))
       val testJar = (sbt.Keys.`package` in Test).value
       val func = testJar -> s"lib/${testJar.getName}"
       fromClasspath((managedClasspath in Test).value, "lib", _ => true) :+
-       (testJar -> s"lib/${testJar.getName}")
+        (testJar -> s"lib/${testJar.getName}")
     },
 
     noPackageDoc,
-//    dockerSettings,
-//    dockerPublishingSettings,
-
     dockerCmd := Seq(
       "-u",
       "/tmp/test-results",
@@ -43,12 +40,3 @@ lazy val root = (project in file("."))
 
 //skip javadoc.jar build for performance
 lazy val noPackageDoc = Seq(mappings in (Compile, packageDoc) := Seq())
-
-//lazy val dockerSettings = Seq(
-//  maintainer in Docker := "",
-//  dockerBaseImage := ""
-//)
-//lazy val dockerPublishingSettings = Seq(
-//  dockerRepository := Some(""),
-//  dockerUpdateLatest := true
-//)
