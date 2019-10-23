@@ -10,7 +10,7 @@ lazy val root = (project in file("."))
       "com.github.agourlay"     %% "cornichon-test-framework" % "0.18.1" ::
         "eu.timepit"            %% "refined"                  % "0.9.10" ::
         "eu.timepit"            %% "refined-pureconfig"       % "0.9.10" ::
-        "com.github.pureconfig" %% "pureconfig"               % "0.12.0" ::
+        "com.github.pureconfig" %% "pureconfig"               % "0.12.1" ::
         Nil
     ) map (_ % Test)
   )
