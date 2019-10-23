@@ -18,8 +18,12 @@ Run the image with the environment variables defined either in a file:
 ```
 # docker run -it --env-file <.env file> <image ID>
 ```
-or explicitly, if variables have been exported to a local environment:
+or explicitly, with variables defined in a local environment:
 ```
+# AUTH_URL=<auth url>
+# CLIENT_ID=<client id>
+# CLIENT_SECRET=<client secret>
+# PROJECT_KEY=<project key>
 # docker run -it -e AUTH_URL -e CLIENT_ID -e CLIENT_SECRET -e PROJECT_KEY <image ID>
 ```
 
