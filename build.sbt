@@ -5,7 +5,7 @@ ThisBuild / organizationName := "commercetools"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "authTest",
+    name := "ctp-smoke-tests",
     libraryDependencies ++= (
       "com.github.agourlay"     %% "cornichon-test-framework" % "0.18.1" ::
         "eu.timepit"            %% "refined"                  % "0.9.10" ::
