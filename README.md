@@ -1,5 +1,7 @@
 # ctp-smoke-tests
 
+[![CircleCI](https://circleci.com/gh/commercetools/ctp-smoke-tests.svg?style=svg)](https://circleci.com/gh/commercetools/ctp-smoke-tests)
+
 ## Prerequisites
 The following environment variables have to be defined to run the tests:
 
