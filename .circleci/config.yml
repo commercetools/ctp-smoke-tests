@@ -31,6 +31,36 @@ executors:
       - image: openlaw/scala-builder
     working_directory: *working_directory
 
+  docker-executor:
+    docker:
+      - image: gcr.io/cloud-builders/docker
+    working_directory: *working_directory
+
+commands:
+  login-google-docker-registry:
+    description: "Login to GCP docker registry access"
+    steps:
+      - run: echo $DOCKER_REGISTRY_KEY | base64 --decode > gcloud-service-key.json
+      - run: docker login -u _json_key -p "$(cat gcloud-service-key.json)" https://gcr.io
+
+  build_and_push_docker:
+    description: "Build & push docker container"
+    parameters:
+      path:
+        type: string
+      container_name:
+        type: string
+    steps:
+      - run:
+          name: Build << parameters.container_name >> docker container
+          command: |
+            set -e
+            cd << parameters.path >>
+            # The tag "latest" will always contain the last build artifacts
+            docker build -t gcr.io/ct-images/<< parameters.container_name >>:${CIRCLE_SHA1} -t gcr.io/ct-images/<< parameters.container_name >>:${CIRCLE_BRANCH} .
+            docker push gcr.io/ct-images/<< parameters.container_name >>
+
+
 jobs:
   smoke_tests:
     executor: sbt-executor
@@ -40,13 +70,31 @@ jobs:
       - restore_cache: *restore-sbt-cache
       - run:
           name: Smoke tests
-          command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean test exit
+          command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean test docker:stage exit
       - save_cache: *save-git-cache
       - save_cache: *save-sbt-cache
+      - persist_to_workspace:
+          root: ~/ctp-smoke-tests
+          paths:
+            - target/docker/stage/
+
+  push_docker_image:
+    executor: docker-executor
+    steps:
+      - setup_remote_docker
+      - attach_workspace:
+          at: ~/ctp-smoke-tests
+      - login-google-docker-registry
+      - build_and_push_docker:
+          path: ~/ctp-smoke-tests/target/docker/stage/
+          container_name: ctp-smoke-tests
 
 workflows:
   version: 2.1
   build:
     jobs:
       - smoke_tests
+      - push_docker_image:
+          requires:
+            - smoke_tests
 
