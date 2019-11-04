@@ -1,5 +1,5 @@
 ThisBuild / scalaVersion     := "2.12.10"
-ThisBuild / version          := "0.1.0-SNAPSHOT"
+ThisBuild / version          := git.gitHeadCommit.value.getOrElse("1.0")
 ThisBuild / organization     := "com.commercetools"
 ThisBuild / organizationName := "commercetools"
 
@@ -9,7 +9,7 @@ import NativePackagerHelper._
 lazy val root = (project in file("."))
   .enablePlugins(JavaAppPackaging, DockerPlugin)
   .settings(
-    name                 := "smoke-tests",
+    name                 := "ctp-smoke-tests",
     libraryDependencies  ++= smokeTests,
     scalacOptions        += "-Xmacro-settings:materialize-derivations",
     mainClass in Compile := Some("org.scalatest.tools.Runner"),
@@ -35,8 +35,15 @@ lazy val root = (project in file("."))
       "-P", // tests in parallel: http://www.scalatest.org/user_guide/using_the_runner#executingSuitesInParallel
       "-oDI" // standard output: D - show all durations, I - show reminder of failed and canceled tests without stack traces
     ),
-    packageName in Docker := "ctp-smoke-tests"
+    dockerPublishingSettings
   )
 
 //skip javadoc.jar build for performance
 lazy val noPackageDoc = Seq(mappings in (Compile, packageDoc) := Seq())
+
+// docker publishing to public repo: https://console.cloud.google.com/gcr/images/ct-images
+// needs a docker login to the GCE container registry first
+lazy val dockerPublishingSettings = Seq(
+  dockerRepository     := Some("gcr.io/ct-images"),
+  dockerUpdateLatest   := true
+)
