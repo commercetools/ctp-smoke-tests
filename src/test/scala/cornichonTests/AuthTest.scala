@@ -1,18 +1,12 @@
 package cornichonTests
 
-import com.github.agourlay.cornichon.CornichonFeature
+class AuthTest extends FeatureWithToken {
 
-class AuthTest extends CornichonFeature with FeatureConfig {
-  def feature = Feature("checking the API request") {
-    Scenario("API request returns 200") {
+  def feature = Feature("Checking the API request") {
 
-      WithBasicAuth(clientId, clientSecret) {
-        When I post(authUrl)
-          .withParams("grant_type" -> "client_credentials", "scope" -> s"manage_project:${projectKey}")
-
-        Then assert status.is(200)
-        And I show_last_body_json
-      }
+    Scenario("return 200 for the API request") {
+      Then asssert body.path("access_token").isPresent
+      And I show_last_body_json
     }
   }
 }
