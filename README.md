@@ -7,7 +7,7 @@
 The following environment variables have to be defined to run the tests:
 
 ```
-$ AUTH_URL=<auth url>/oauth/token
+$ AUTH_URL=<auth url>
 $ API_URL=<api url>
 $ CLIENT_ID=<client id>
 $ CLIENT_SECRET=<client secret>
