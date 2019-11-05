@@ -8,12 +8,12 @@ class FindProductTest extends FeatureWithToken {
       WithToken {
         Then assert addProductType
         Then assert addProduct
+        Then assert getProductProjection
+        Then assert fullTextProductSearch
+        Then assert unpublishProduct
+        Then assert deleteProduct
+        Then assert deleteProductType
         And I show_last_body_json
-
-        //TODO product projection search
-        //TODO full text search
-        //TODO delete product
-        //TODO delete product type
       }
     }
   }
@@ -56,13 +56,59 @@ class FindProductTest extends FeatureWithToken {
           |    "typeId" : "product-type"
           |  },
           |  "name" : {
-          |    "en" : "Some Product"
+          |    "en" : "Test Product"
           |  },
           |  "slug" : {
           |    "en" : "product_slug_<random-uuid>"
-          |  }
+          |  },
+          |  "publish": true
           |}
           |""".stripMargin
       )
+      Then I save_body_path("id" -> "productId", "version" -> "productVersion")
+      Then assert status.is(201)
+    }
+
+  def getProductProjection =
+    Attach {
+      When I get(s"$apiUrl/$projectKey/product-projections/<productId>")
+      Then assert status.is(200)
+    }
+
+  def fullTextProductSearch =
+    Attach {
+      When I get(s"$apiUrl/$projectKey/product-projections").
+        withParams("name" -> "Test Product", "filter" -> "productType.id:<productTypeId>")
+      Then assert status.is(200)
+    }
+
+  def unpublishProduct =
+    Attach {
+      When I post(s"$apiUrl/$projectKey/products/<productId>").withBody("""
+          |{
+          |    "version": <productVersion>,
+          |    "actions": [
+          |        {
+          |            "action" : "unpublish"
+          |        }
+          |    ]
+          |}
+          |""".stripMargin)
+      Then assert body.path("masterData.published").is(false)
+      Then I save_body_path("version" -> "productVersion")
+      Then assert status.is(200)
+    }
+
+  def deleteProduct =
+    Attach {
+      When I delete(s"$apiUrl/$projectKey/products/<productId>").
+        withParams("version" -> "<productVersion>")
+      Then assert status.is(200)
+    }
+
+  def deleteProductType =
+    Attach {
+      When I delete(s"$apiUrl/$projectKey/product-types/<productTypeId>").
+        withParams("version" -> "<productVersion>")
     }
 }
