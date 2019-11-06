@@ -7,7 +7,8 @@
 The following environment variables have to be defined to run the tests:
 
 ```
-$ AUTH_URL=<auth url>/oauth/token
+$ AUTH_URL=<auth url>
+$ API_URL=<api url>
 $ CLIENT_ID=<client id>
 $ CLIENT_SECRET=<client secret>
 $ PROJECT_KEY=<project key>
@@ -16,7 +17,7 @@ $ PROJECT_KEY=<project key>
 Run the smoke tests as docker container:
 
 ```
-$ docker run -it --rm -e AUTH_URL -e CLIENT_ID -e CLIENT_SECRET -e PROJECT_KEY gcr.io/ct-images/ctp-smoke-tests:master
+$ docker run -it --rm -e AUTH_URL -e API_URL -e CLIENT_ID -e CLIENT_SECRET -e PROJECT_KEY gcr.io/ct-images/ctp-smoke-tests:master
 ```
 
 ## Docker set up (sbt-native-packager)
