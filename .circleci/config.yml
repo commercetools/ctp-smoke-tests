@@ -71,6 +71,16 @@ jobs:
       - run:
           name: Smoke tests
           command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean test docker:stage exit
+      - run:
+          - name: Save test results
+            - command: |
+              mkdir -p ~/junit/
+              find . -type f -regex ".*/target/test-reports/TEST-.*xml" -exec cp {} ~/junit/ \;
+            when: always
+      - save_test_results:
+          - path: ~/junit
+      - store_artifacts:
+          - path: ~/junit
       - save_cache: *save-git-cache
       - save_cache: *save-sbt-cache
       - persist_to_workspace:
