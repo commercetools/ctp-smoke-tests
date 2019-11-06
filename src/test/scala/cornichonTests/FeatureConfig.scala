@@ -8,6 +8,7 @@ import pureconfig._
 
 case class Config(
     authUrl: String Refined Url,
+    apiUrl: String Refined Url,
     clientId: String,
     clientSecret: String,
     projectKey: String,
@@ -18,5 +19,6 @@ trait FeatureConfig {
   lazy val clientId = configuration.clientId
   lazy val clientSecret = configuration.clientSecret
   lazy val authUrl = configuration.authUrl.value
+  lazy val apiUrl = configuration.apiUrl.value
   lazy val projectKey = configuration.projectKey
 }
