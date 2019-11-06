@@ -42,7 +42,7 @@ class FindProductTest extends FeatureWithToken {
           |}
           |""".stripMargin
       )
-      Then I save_body_path("id" -> "productTypeId")
+      Then I save_body_path("id" -> "productTypeId", "version" -> "productTypeVersion")
       Then assert status.is(201)
     }
 
@@ -109,6 +109,7 @@ class FindProductTest extends FeatureWithToken {
   def deleteProductType =
     Attach {
       When I delete(s"$apiUrl/$projectKey/product-types/<productTypeId>").
-        withParams("version" -> "<productVersion>")
+        withParams("version" -> "<productTypeVersion>")
+      Then assert status.is(200)
     }
 }
