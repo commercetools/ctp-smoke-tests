@@ -21,7 +21,7 @@ trait AuthSteps {
     effect = { s =>
       val effect = auth.requestEffect(
         request = HttpRequest
-          .post("")
+          .post("/oauth/token")
           .withParams("grant_type" -> "client_credentials", "scope" -> s"manage_project:$projectKey")
           .withHeaders("Authorization" -> basicAuthHeaders(clientId, clientSecret)),
         extractor = RootExtractor("oauth-token-extract"),
