@@ -11,6 +11,7 @@ lazy val root = (project in file("."))
   .settings(
     name                 := "ctp-smoke-tests",
     libraryDependencies  ++= smokeTests,
+    resolvers            += "Sonatype snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/",
     scalacOptions        += "-Xmacro-settings:materialize-derivations",
     mainClass in Compile := Some("com.github.agourlay.cornichon.framework.MainRunner"),
 
