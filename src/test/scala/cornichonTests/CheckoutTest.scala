@@ -40,7 +40,7 @@ class CheckoutTest extends FeatureWithToken {
       When I post(s"$apiUrl/$projectKey/tax-categories")
         .withBody("""
           |{
-          |  "name" : "test-tax-category-<random-uuid>",
+          |  "name" : "test-tax-category-<random-positive-integer>",
           |  "rates" : [ {
           |    "name" : "test-tax-category",
           |    "amount" : 0.2,
