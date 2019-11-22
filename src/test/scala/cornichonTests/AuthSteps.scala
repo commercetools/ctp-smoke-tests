@@ -14,7 +14,8 @@ trait AuthSteps {
 
   lazy val auth = httpServiceByURL(authUrl)
 
-  def WithToken = WithHeaders("Authorization" -> "Bearer <oauth-token>")
+  def WithToken =
+    WithHeaders("Authorization" -> "Bearer <oauth-token>", "X-correlation-ID" -> "correlation-id")
 
   def basic_auth_request = EffectStep(
     title = "sending API auth request",
