@@ -14,7 +14,6 @@ class CheckoutTest extends FeatureWithToken {
         Then assert deleteOrderFromCart
         Then assert deleteCart
         Then assert deleteTaxCategory
-        And I show_last_body_json
       }
     }
   }
