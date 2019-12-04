@@ -5,8 +5,8 @@ class CheckoutExistProdTest extends CheckoutTest with FeatureWithToken {
 
   override lazy val baseUrl = apiUrl
 
-  override def feature: FeatureDef = Feature("Checkout process") {
-    Scenario("Select item from existing product | Make an order | Delete order") {
+  override def feature: FeatureDef = Feature("Checkout process for existing product") {
+    Scenario("Select existing product | Create cart | Add LineItem | Create order | Delete order | Delete cart") {
       WithToken {
         Then assert queryProducts
         Then assert createCart          //def in CheckoutTest
