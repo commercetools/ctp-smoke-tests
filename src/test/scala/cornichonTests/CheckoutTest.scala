@@ -3,8 +3,14 @@ import com.github.agourlay.cornichon.core.FeatureDef
 
 class CheckoutTest extends FeatureWithToken {
 
+  override lazy val baseUrl = apiUrl + s"/$projectKey"
+
   def feature: FeatureDef = Feature("Checkout process") {
-    Scenario("Adding item to cart | Making order from cart | Deleting order, cart, tax") {
+    Scenario(
+      """Create cart | Create tax category | Add line item |
+        | Create order | Delete order | Delete cart |
+        | Delete tax category
+        | """.stripMargin.replaceAll("\n","")) {
       WithToken {
         Then assert createCart
         Then assert createTaxCategory
@@ -20,7 +26,7 @@ class CheckoutTest extends FeatureWithToken {
 
   def createCart =
     Attach {
-      When I post(s"$apiUrl/$projectKey/carts")
+      When I post("/carts")
         .withBody("""
           |{
           |  "currency" : "EUR",
@@ -36,7 +42,7 @@ class CheckoutTest extends FeatureWithToken {
 
   def createTaxCategory =
     Attach {
-      When I post(s"$apiUrl/$projectKey/tax-categories")
+      When I post("/tax-categories")
         .withBody("""
           |{
           |  "name" : "test-tax-category-<random-positive-integer>",
@@ -55,7 +61,7 @@ class CheckoutTest extends FeatureWithToken {
 
   def addCustomLineItem =
     Attach {
-      When I post(s"$apiUrl/$projectKey/carts/<cartId>")
+      When I post("/carts/<cartId>")
         .withBody("""
           |{
           |    "version": <cartVersion>,
@@ -85,7 +91,7 @@ class CheckoutTest extends FeatureWithToken {
 
   def createOrderFromCart =
     Attach {
-      When I post(s"$apiUrl/$projectKey/orders")
+      When I post("/orders")
         .withBody("""
           |{
           |  "id" : "<cartId>",
@@ -99,28 +105,28 @@ class CheckoutTest extends FeatureWithToken {
 
   def getCartById =
     Attach {
-      When I get(s"$apiUrl/$projectKey/carts/<cartId>")
+      When I get("/carts/<cartId>")
       Then I save_body_path("version" -> "cartVersion")
       Then assert status.is(200)
     }
 
   def deleteOrderFromCart =
     Attach {
-      When I delete(s"$apiUrl/$projectKey/orders/<orderFromCartId>")
+      When I delete("/orders/<orderFromCartId>")
         .withParams("version" -> "<orderFromCartVersion>")
       Then assert status.is(200)
     }
 
   def deleteCart =
     Attach {
-      When I delete(s"$apiUrl/$projectKey/carts/<cartId>")
+      When I delete("/carts/<cartId>")
         .withParams("version" -> "<cartVersion>")
       Then assert status.is(200)
     }
 
   def deleteTaxCategory =
     Attach {
-      When I delete(s"$apiUrl/$projectKey/tax-categories/<taxCategoryId>/")
+      When I delete("/tax-categories/<taxCategoryId>/")
         .withParams("version" -> "<taxCategoryVersion>")
       Then assert status.is(200)
     }
