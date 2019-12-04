@@ -1,40 +1,78 @@
 package cornichonTests
 import com.github.agourlay.cornichon.core.FeatureDef
 
-class CheckoutExistProdTest extends FeatureWithToken {
+class CheckoutExistProdTest extends CheckoutTest with FeatureWithToken {
 
-  def feature: FeatureDef = Feature("Checkout process") {
+  override lazy val baseUrl = apiUrl
+
+  override def feature: FeatureDef = Feature("Checkout process") {
     Scenario("Select item from existing product | Make an order | Delete order") {
       WithToken {
         Then assert queryProducts
-        Then assert getProductProjectionByID
-        And I show_last_body_json
+        Then assert createCart          //def in CheckoutTest
+        Then assert addLineItem
+        Then assert createOrderFromCart
+        Then assert getCartById         //def in CheckoutTest
+        Then assert deleteOrderFromCart //def in CheckoutTest
+        Then assert deleteCart          //def in CheckoutTest
       }
     }
   }
 
   def queryProducts = {
     Attach {
-      When I get(s"$apiUrl/$projectKey/product-projections/search").withParams("staged" -> "false")
-      Then assert status.is(200)
-      Then assert body.path("count").is("*any-positive-integer*")
+      When I get(s"/$projectKey/product-projections").withParams(
+
+        "staged" -> "false",
+        "where" -> "masterVariant(id is defined)",
+        "where" -> "masterVariant(prices(id is defined))",
+        "where" -> "taxCategory(id is defined)"
+      )
       Then I save_body_path("results[0].id" -> "productId")
-    }
-  }
-
-  def getProductProjectionByID = {
-    Attach {
-      When I get(s"$apiUrl/$projectKey/product-projections/<productId>")
-      Then assert body.path("taxCategory").isPresent
-
-      //TODO check if price in masterVariant is present
-      //TODO add line item from existing product
-      //TODO make an order from line item
-      //TODO unpublish product
-      //TODO delete order form cart
-      //TODO delete cart
-
       Then assert status.is(200)
     }
   }
+
+  def addLineItem =
+    Attach {
+      When I post(s"/$projectKey/carts/<cartId>").withBody("""
+          |{
+          |    "version": <cartVersion>,
+          |    "actions": [
+          |        {
+          |            "action" : "addLineItem",
+          |            "productId" : "<productId>"
+          |        },
+          |        {
+          |         	  "action" : "setShippingAddress",
+          |         	  "address": {
+          |             	 	"key": "test_address",
+          |         				"company": "commercetools GmbH",
+          |         				"streetName": "Sonnenallee",
+          |         				"streetNumber": "223",
+          |         				"city": "Berlin",
+          |         				"postalCode": "12059",
+          |         				"country": "DE"
+          |             }
+          |        }
+          |
+          |    ]
+          |}
+          |""".stripMargin)
+      Then I save_body_path("version" -> "cartVersion")
+      And assert status.is(200)
+    }
+
+  override def createOrderFromCart =
+    Attach {
+      When I post(s"/$projectKey/orders").withBody("""
+            |{
+            |  "id" : "<cartId>",
+            |  "version" : <cartVersion>
+            |}
+            |""".stripMargin)
+      Then I save_body_path("id" -> "orderFromCartId")
+      Then I save_body_path("version" -> "orderFromCartVersion")
+      Then assert status.is(201)
+    }
 }
