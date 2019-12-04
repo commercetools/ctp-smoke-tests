@@ -3,7 +3,7 @@ import com.github.agourlay.cornichon.core.FeatureDef
 
 class CheckoutExistProdTest extends CheckoutTest with FeatureWithToken {
 
-  override lazy val baseUrl = apiUrl
+  override lazy val baseUrl = apiUrl + s"/$projectKey"
 
   override def feature: FeatureDef = Feature("Checkout process for existing product") {
     Scenario("Select existing product | Create cart | Add LineItem | Create order | Delete order | Delete cart") {
@@ -21,7 +21,7 @@ class CheckoutExistProdTest extends CheckoutTest with FeatureWithToken {
 
   def queryProducts = {
     Attach {
-      When I get(s"/$projectKey/product-projections").withParams(
+      When I get("/product-projections").withParams(
 
         "staged" -> "false",
         "where" -> "masterVariant(id is defined)",
@@ -35,7 +35,7 @@ class CheckoutExistProdTest extends CheckoutTest with FeatureWithToken {
 
   def addLineItem =
     Attach {
-      When I post(s"/$projectKey/carts/<cartId>").withBody("""
+      When I post("/carts/<cartId>").withBody("""
           |{
           |    "version": <cartVersion>,
           |    "actions": [
@@ -65,7 +65,7 @@ class CheckoutExistProdTest extends CheckoutTest with FeatureWithToken {
 
   override def createOrderFromCart =
     Attach {
-      When I post(s"/$projectKey/orders").withBody("""
+      When I post("/orders").withBody("""
             |{
             |  "id" : "<cartId>",
             |  "version" : <cartVersion>
