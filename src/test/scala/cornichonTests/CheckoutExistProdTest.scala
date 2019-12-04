@@ -19,7 +19,7 @@ class CheckoutExistProdTest extends CheckoutTest with FeatureWithToken {
     }
   }
 
-  def queryProducts = {
+  def queryProducts =
     Attach {
       When I get("/product-projections").withParams(
 
@@ -31,7 +31,7 @@ class CheckoutExistProdTest extends CheckoutTest with FeatureWithToken {
       Then I save_body_path("results[0].id" -> "productId")
       Then assert status.is(200)
     }
-  }
+
 
   def addLineItem =
     Attach {
