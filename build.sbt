@@ -31,7 +31,7 @@ lazy val root = (project in file("."))
     noPackageDoc,
     dockerCmd := Seq(
       "--packageToScan=cornichonTests",
-      "--reportsOutputDir=/tmp/test-results"
+      "--reportsOutputDir=/target/test-reports"
     ),
     dockerPublishingSettings
   )
