@@ -6,11 +6,7 @@ class CheckoutTest extends FeatureWithToken {
   override lazy val baseUrl = apiUrl + s"/$projectKey"
 
   def feature: FeatureDef = Feature("Checkout process") {
-    Scenario(
-      """Create cart | Create tax category | Add line item |
-        | Create order | Delete order | Delete cart |
-        | Delete tax category
-        | """.stripMargin.replaceAll("\n","")) {
+    Scenario("Create cart | Add custom line item | Create order | Cleanup"){
       WithToken {
         Then assert createCart
         Then assert createTaxCategory
