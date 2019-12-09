@@ -1,37 +1,44 @@
 package cornichonTests
 import com.github.agourlay.cornichon.core.FeatureDef
 
-class CheckoutExistProdTest extends CheckoutTest with FeatureWithToken {
+class CheckoutExistProdTest extends CheckoutTest with FeatureWithToken with FeatureWithProduct {
 
   override lazy val baseUrl = apiUrl + s"/$projectKey"
 
   override def feature: FeatureDef = Feature("Checkout process for existing product") {
-    Scenario("Select existing product | Create cart | Add LineItem | Create order | Delete order | Delete cart") {
+    Scenario("Add product | Create order | Cleanup") {
       WithToken {
-        Then assert queryProducts
-        Then assert createCart          //def in CheckoutTest
-        Then assert addLineItem
-        Then assert createOrderFromCart
-        Then assert getCartById         //def in CheckoutTest
-        Then assert deleteOrderFromCart //def in CheckoutTest
-        Then assert deleteCart          //def in CheckoutTest
+        Then I createTaxCategory
+        Then I AddProduct
+        Then I createCart
+        Then I addLineItem
+        Then I createOrderFromCart
+        Then I getCartById
+        Then I deleteOrderFromCart
+        Then I deleteCart
+        Then I DeleteProduct
       }
     }
   }
 
-  def queryProducts =
+  override def createTaxCategory =
     Attach {
-      When I get("/product-projections").withParams(
-
-        "staged" -> "false",
-        "where" -> "masterVariant(id is defined)",
-        "where" -> "masterVariant(prices(id is defined))",
-        "where" -> "taxCategory(id is defined)"
-      )
-      Then I save_body_path("results[0].id" -> "productId")
-      Then assert status.is(200)
+      When I post(s"$apiUrl/$projectKey/tax-categories")
+        .withBody("""
+          |{
+          |  "name" : "test-tax-category-<random-positive-integer>",
+          |  "rates" : [ {
+          |    "name" : "test-tax-category",
+          |    "amount" : 0.2,
+          |    "includedInPrice" : true,
+          |    "country" : "DE"
+          |  } ]
+          |}
+          |""".stripMargin)
+      Then I save_body_path("id" -> "taxCategoryId")
+      Then I save_body_path("version" -> "taxCategoryVersion")
+      Then assert status.is(201)
     }
-
 
   def addLineItem =
     Attach {
@@ -55,7 +62,6 @@ class CheckoutExistProdTest extends CheckoutTest with FeatureWithToken {
           |         				"country": "DE"
           |             }
           |        }
-          |
           |    ]
           |}
           |""".stripMargin)
