@@ -17,6 +17,7 @@ class CheckoutExistProdTest extends CheckoutTest with FeatureWithToken with Feat
         Then I deleteOrderFromCart
         Then I deleteCart
         Then I deleteProduct
+        Then I deleteTaxCategory
       }
     }
   }
