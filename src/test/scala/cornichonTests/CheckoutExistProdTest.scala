@@ -21,25 +21,6 @@ class CheckoutExistProdTest extends CheckoutTest with FeatureWithToken with Feat
     }
   }
 
-  override def createTaxCategory =
-    Attach {
-      When I post(s"$apiUrl/$projectKey/tax-categories")
-        .withBody("""
-          |{
-          |  "name" : "test-tax-category-<random-positive-integer>",
-          |  "rates" : [ {
-          |    "name" : "test-tax-category",
-          |    "amount" : 0.2,
-          |    "includedInPrice" : true,
-          |    "country" : "DE"
-          |  } ]
-          |}
-          |""".stripMargin)
-      Then I save_body_path("id" -> "taxCategoryId")
-      Then I save_body_path("version" -> "taxCategoryVersion")
-      Then assert status.is(201)
-    }
-
   def addLineItem =
     Attach {
       When I post("/carts/<cartId>").withBody("""
