@@ -9,14 +9,14 @@ class CheckoutExistProdTest extends CheckoutTest with FeatureWithToken with Feat
     Scenario("Add product | Create order | Cleanup") {
       WithToken {
         Then I createTaxCategory
-        Then I AddProduct
+        Then I addProduct
         Then I createCart
         Then I addLineItem
         Then I createOrderFromCart
         Then I getCartById
         Then I deleteOrderFromCart
         Then I deleteCart
-        Then I DeleteProduct
+        Then I deleteProduct
       }
     }
   }

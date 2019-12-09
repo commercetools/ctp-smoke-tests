@@ -5,21 +5,21 @@ import com.github.agourlay.cornichon.CornichonFeature
 trait FeatureWithProduct {
   this: CornichonFeature =>
 
-  def AddProduct =
+  def addProduct =
     Attach {
-      addProductType
-      addProduct
+      add_product_type
+      add_product
     }
 
-  def DeleteProduct =
+  def deleteProduct =
     Attach {
-      unpublishProduct
-      deleteProduct
-      deleteProductType
+      unpublish_product
+      delete_product
+      delete_product_pype
     }
 
 
-  def addProductType =
+  def add_product_type =
     Attach {
       When I post("/product-types").withBody(
         """
@@ -47,7 +47,7 @@ trait FeatureWithProduct {
       Then assert status.is(201)
     }
 
-  def addProduct =
+  def add_product =
     Attach {
       When I post("/products").withBody(
         """
@@ -85,7 +85,7 @@ trait FeatureWithProduct {
       Then assert status.is(201)
     }
 
-  def unpublishProduct =
+  def unpublish_product =
     Attach {
       When I post("/products/<productId>").withBody(
         """
@@ -102,14 +102,14 @@ trait FeatureWithProduct {
       Then I save_body_path("version" -> "productVersion")
     }
 
-  def deleteProduct =
+  def delete_product =
     Attach {
       When I delete("/products/<productId>").
         withParams("version" -> "<productVersion>")
       Then assert status.is(200)
     }
 
-  def deleteProductType =
+  def delete_product_pype =
     Attach {
       When I delete("/product-types/<productTypeId>").
         withParams("version" -> "<productTypeVersion>")
