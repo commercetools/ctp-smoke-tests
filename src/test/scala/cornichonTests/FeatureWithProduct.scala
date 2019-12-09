@@ -2,7 +2,7 @@ package cornichonTests
 
 import com.github.agourlay.cornichon.CornichonFeature
 
-trait FeatureWithProduct extends FeatureWithToken {
+trait FeatureWithProduct {
   this: CornichonFeature =>
 
   def AddProduct =
