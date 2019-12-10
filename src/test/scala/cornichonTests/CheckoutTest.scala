@@ -25,10 +25,10 @@ class CheckoutTest extends FeatureWithToken {
       When I post("/carts")
         .withBody("""
           |{
-          |  "currency" : "EUR",
-          |  "shippingAddress" : {
-          |  	"country" : "DE"
-          |  }
+          |   "currency" : "EUR",
+          |   "shippingAddress" : {
+          |     "country" : "DE"
+          |   }
           |}
           |""".stripMargin)
       Then I save_body_path("id" -> "cartId")
@@ -41,13 +41,15 @@ class CheckoutTest extends FeatureWithToken {
       When I post("/tax-categories")
         .withBody("""
           |{
-          |  "name" : "test-tax-category-<random-positive-integer>",
-          |  "rates" : [ {
-          |    "name" : "test-tax-category",
-          |    "amount" : 0.2,
-          |    "includedInPrice" : true,
-          |    "country" : "DE"
-          |  } ]
+          |   "name" : "test-tax-category-<random-positive-integer>",
+          |   "rates" : [
+          |     {
+          |       "name" : "test-tax-category",
+          |       "amount" : 0.2,
+          |       "includedInPrice" : true,
+          |       "country" : "DE"
+          |     }
+          |   ]
           |}
           |""".stripMargin)
       Then I save_body_path("id" -> "taxCategoryId")
@@ -60,25 +62,25 @@ class CheckoutTest extends FeatureWithToken {
       When I post("/carts/<cartId>")
         .withBody("""
           |{
-          |    "version": <cartVersion>,
-          |    "actions": [
-          |        {
-          |            "action" : "addCustomLineItem",
-          |            "name" : {
-          |              "en" : "Name EN",
-          |              "de" : "Name DE"
-          |            },
-          |            "money" : {
-          |              "currencyCode" : "EUR",
-          |              "centAmount" : 4200
-          |            },
-          |            "slug" : "testSlug",
-          |            "taxCategory" : {
-          |              "typeId" : "tax-category",
-          |              "id" : "<taxCategoryId>"
-          |            }
-          |          }
-          |    ]
+          |   "version": <cartVersion>,
+          |   "actions": [
+          |     {
+          |       "action" : "addCustomLineItem",
+          |       "name" : {
+          |         "en" : "Name EN",
+          |         "de" : "Name DE"
+          |       },
+          |       "money" : {
+          |         "currencyCode" : "EUR",
+          |         "centAmount" : 4200
+          |       },
+          |       "slug" : "testSlug",
+          |       "taxCategory" : {
+          |         "typeId" : "tax-category",
+          |         "id" : "<taxCategoryId>"
+          |       }
+          |     }
+          |   ]
           |}
           |""".stripMargin)
       Then I save_body_path("version" -> "customLineItemVersion")
@@ -90,8 +92,8 @@ class CheckoutTest extends FeatureWithToken {
       When I post("/orders")
         .withBody("""
           |{
-          |  "id" : "<cartId>",
-          |  "version" : <customLineItemVersion>
+          |   "id" : "<cartId>",
+          |   "version" : <customLineItemVersion>
           |}
           |""".stripMargin)
       Then I save_body_path("id" -> "orderFromCartId")
