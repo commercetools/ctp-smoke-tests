@@ -10,10 +10,10 @@ class CheckoutExistProdTest extends CornichonFeature with FeatureWithProduct {
 
   override def feature: FeatureDef = Feature("Checkout process for existing product") {
     Scenario("Add product | Create order | Cleanup") {
-        Then assert addTaxCategoryStep
-
-        And I show_last_body_json
-        And I show_session
+      Given a newTaxCategory
+      When I queryTaxCategories
+      Then assert status.is(200)
+      And I show_last_body_json
     }
   }
 

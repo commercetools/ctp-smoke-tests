@@ -13,55 +13,75 @@ trait FeatureWithProduct extends FeatureWithToken {
 
   lazy val baseUrlHttp = httpServiceByURL(s"$apiUrl" + s"/$projectKey")
 
-  def addTaxCategoryStep =
+  def newTaxCategory = ScenarioResourceStep(
+    title = "add new tax category",
+    acquire = addTaxCategory,
+    release = deleteTaxCategory
+  )
+
+  def queryTaxCategories =
     Attach {
-      WithToken {
-        ScenarioResourceStep(
-          title = "add tax cat",
-          acquire =  addTaxCategory,
-          release = deleteTaxCategory
+      WithToken{
+        EffectStep(
+          title = "query tax cats",
+          effect = baseUrlHttp.requestEffect(
+            request = HttpRequest
+                .get("/tax-categories"),
+            expectedStatus = Some(200)
+          )
         )
       }
     }
 
-  def addTaxCategory = EffectStep(
-    title = "create tax category",
-    effect = baseUrlHttp.requestEffect(
-      request = HttpRequest
-        .post("/tax-categories")
-        .withBody(
-          """
-            |{
-            |  "name" : "test-tax-category-<random-positive-integer>",
-            |  "rates" : [ {
-            |    "name" : "test-tax-category",
-            |    "amount" : 0.2,
-            |    "includedInPrice" : true,
-            |    "country" : "DE"
-            |  } ]
-            |}
-            |""".stripMargin),
-      extractor = RootExtractor("tax-category"),
-      expectedStatus = Some(201)
-    )
-  )
+  def addTaxCategory =
+    Attach {
+      WithToken {
+        EffectStep(
+          title = "create tax category",
+          effect = baseUrlHttp.requestEffect(
+            request = HttpRequest
+              .post("/tax-categories")
+              .withBody(
+                """
+                  |{
+                  |  "name" : "test-tax-category-<random-positive-integer>",
+                  |  "rates" : [ {
+                  |    "name" : "test-tax-category",
+                  |    "amount" : 0.2,
+                  |    "includedInPrice" : true,
+                  |    "country" : "DE"
+                  |  } ]
+                  |}
+                  |""".stripMargin),
+            extractor = RootExtractor("tax-category"),
+            expectedStatus = Some(201)
+          )
+        )
+      }
+    }
 
-  def deleteTaxCategory = EffectStep(
-    title = "deleting tax category",
-    effect = baseUrlHttp.requestEffect(
-      request = HttpRequest
-        .delete(s"/tax-categories/<tax-category-id>")
-        .withParams("version" -> s"<tax-category-version>"),
-      expectedStatus = Some(200)
-    )
-  )
-}
+  def deleteTaxCategory =
+    Attach {
+      WithToken {
+        EffectStep(
+          title = "deleting tax category",
+          effect = baseUrlHttp.requestEffect(
+            request = HttpRequest
+              .delete(s"/tax-categories/<tax-category-id>")
+              .withParams("version" -> s"<tax-category-version>"),
+            expectedStatus = Some(200)
+          )
+        )
+      }
+    }
 
-object FeatureWithProduct {
-  val extractors = Map(
-    "tax-category-id" -> JsonMapper("tax-category", "id"),
-    "tax-category-version" -> JsonMapper("tax-category", "version")
-  )
+  object FeatureWithProduct {
+    val extractors = Map(
+      "tax-category-id" -> JsonMapper("tax-category", "id"),
+      "tax-category-version" -> JsonMapper("tax-category", "version")
+    )
+  }
+
 }
 
 //  def addProductType=
