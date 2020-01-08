@@ -51,13 +51,14 @@ commands:
       container_name:
         type: string
     steps:
+      - run: echo 'export DOCKER_TAG_NAME=`echo ${CIRCLE_BRANCH} | tr '_' '-'`' >> $BASH_ENV
       - run:
           name: Build << parameters.container_name >> docker container
           command: |
             set -e
             cd << parameters.path >>
             # The tag "latest" will always contain the last build artifacts
-            docker build -t gcr.io/ct-images/<< parameters.container_name >>:${CIRCLE_SHA1} -t gcr.io/ct-images/<< parameters.container_name >>:${CIRCLE_BRANCH} .
+            docker build -t gcr.io/ct-images/<< parameters.container_name >>:${CIRCLE_SHA1} -t gcr.io/ct-images/<< parameters.container_name >>:${DOCKER_TAG_NAME} .
             docker push gcr.io/ct-images/<< parameters.container_name >>
 
 
