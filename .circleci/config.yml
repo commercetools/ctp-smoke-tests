@@ -51,7 +51,7 @@ commands:
       container_name:
         type: string
     steps:
-      - run: echo 'export DOCKER_TAG_NAME=`echo ${CIRCLE_BRANCH} | tr '_' '-'`' >> $BASH_ENV
+      - run: echo 'export DOCKER_TAG_NAME=`echo ${CIRCLE_BRANCH} | tr '/' '-'`' >> $BASH_ENV
       - run:
           name: Build << parameters.container_name >> docker container
           command: |
