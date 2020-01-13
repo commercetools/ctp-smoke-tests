@@ -14,7 +14,6 @@ class CheckoutExistProdTest extends CornichonFeature with FeatureWithProduct {
       And   I createOrderFromCart
       And   I getOrderFromCart
       And   I getCartById
-      Then  assert status.is(200)
     }
   }
 }
