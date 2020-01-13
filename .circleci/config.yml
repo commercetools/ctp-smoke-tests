@@ -17,6 +17,7 @@ aliases:
   - &save-sbt-cache
     key: sbt-cache
     paths:
+      - "~/.cache/coursier"
       - "~/.sbt"
       - "~/.ivy2/cache"
       - "~/.m2"
