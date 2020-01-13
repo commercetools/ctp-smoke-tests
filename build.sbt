@@ -2,7 +2,7 @@ ThisBuild / scalaVersion     := "2.12.10"
 ThisBuild / version          := git.gitHeadCommit.value.getOrElse("1.0")
 ThisBuild / organization     := "com.commercetools"
 ThisBuild / organizationName := "commercetools"
-
+Test    / parallelExecution  := false
 import Dependencies._
 import NativePackagerHelper._
 
@@ -32,7 +32,7 @@ lazy val root = (project in file("."))
       "/tmp/test-results",
       "-R",
       s"lib/${(artifactPath in (Test, packageBin)).value.getName}",
-      "-P", // tests in parallel: http://www.scalatest.org/user_guide/using_the_runner#executingSuitesInParallel
+//      "-P", // tests in parallel: http://www.scalatest.org/user_guide/using_the_runner#executingSuitesInParallel
       "-oDI" // standard output: D - show all durations, I - show reminder of failed and canceled tests without stack traces
     ),
     dockerPublishingSettings
