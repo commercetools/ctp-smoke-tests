@@ -44,6 +44,15 @@ commands:
       - run: echo $DOCKER_REGISTRY_KEY | base64 --decode > gcloud-service-key.json
       - run: docker login -u _json_key -p "$(cat gcloud-service-key.json)" https://gcr.io
 
+  before_cache:
+    description: "Avoid unnecessary cache updates"
+    steps:
+      - run:
+          command: |
+            rm -fv $HOME/.ivy2/.sbt.ivy.lock
+            find   $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
+            find   $HOME/.sbt        -name "*.lock"               -print -delete
+
   build_and_push_docker:
     description: "Build & push docker container"
     parameters:
@@ -83,6 +92,7 @@ jobs:
           path: ~/junit
       - store_artifacts:
           path: ~/junit
+      - before_cache
       - save_cache: *save-git-cache
       - save_cache: *save-sbt-cache
       - persist_to_workspace:
