@@ -48,6 +48,7 @@ commands:
     description: "Avoid unnecessary cache updates"
     steps:
       - run:
+          name: Before caching cleanup
           command: |
             rm -fv $HOME/.ivy2/.sbt.ivy.lock
             find   $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
