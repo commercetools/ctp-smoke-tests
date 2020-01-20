@@ -157,6 +157,7 @@ trait FeatureWithProduct extends FeatureWithToken {
               .post("/products")
               .withBody("""
                   |{
+                  |  "key" : "test_product",
                   |  "productType" : {
                   |    "id" : "<product-type-id>",
                   |    "typeId" : "product-type"
@@ -378,6 +379,36 @@ trait FeatureWithProduct extends FeatureWithToken {
       }
     }
 
+  def getProductProjectionById =
+    Attach {
+      WithToken {
+        EffectStep(
+          title = "product projection by product ID",
+          effect = baseUrlHttp.requestEffect(
+            request = HttpRequest
+              .get("/product-projections/<product-id>"),
+            expectedStatus = Some(200)
+          )
+        )
+      }
+    }
+
+  def fullTextProductSearch =
+    Attach {
+      WithToken {
+        EffectStep(
+          title = "full-text product projection",
+          effect = baseUrlHttp.requestEffect(
+            request = HttpRequest
+              .get("/product-projections/search")
+              .withParams(
+                "text.en" -> "<product-slug>"),
+            expectedStatus = Some(200)
+          )
+        )
+      }
+    }
+
 }
 
 object FeatureWithProduct {
@@ -389,6 +420,8 @@ object FeatureWithProduct {
     "product-type-version" -> JsonMapper("product-type", "version"),
     "product-id"           -> JsonMapper("product", "id"),
     "product-version"      -> JsonMapper("product", "version"),
+    "product-slug"         -> JsonMapper("product", "masterData.current.slug.en"),
+    "product-sku"          -> JsonMapper("product", "masterData.current.masterVariant.sku"),
     "cart-id"              -> JsonMapper("cart", "id"),
     "cart-version"         -> JsonMapper("cart", "version"),
     "order-id"             -> JsonMapper("order", "id"),
