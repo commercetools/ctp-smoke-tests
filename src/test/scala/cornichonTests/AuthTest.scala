@@ -6,7 +6,6 @@ class AuthTest extends FeatureWithToken {
 
     Scenario("return 200 for the API request") {
       Then asssert body.path("access_token").isPresent
-      And I show_last_body_json
     }
   }
 }
