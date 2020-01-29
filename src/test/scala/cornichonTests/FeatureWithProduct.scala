@@ -11,6 +11,8 @@ trait FeatureWithProduct extends FeatureWithToken {
 
   override def registerExtractors: Map[String, Mapper] = FeatureWithProduct.extractors ++ AuthSteps.registerExtractors
 
+  override lazy val requestTimeout = 4.seconds
+
   lazy val baseUrlHttp = httpServiceByURL(s"$apiUrl" + s"/$projectKey")
 
   def newTaxCategory = ScenarioResourceStep(
