@@ -3,6 +3,7 @@ import com.github.agourlay.cornichon.core.FeatureDef
 import scala.concurrent.duration._
 
 class FindProductTest extends FeatureWithProduct {
+  override lazy val requestTimeout = 4.seconds
 
   def feature: FeatureDef = Feature("Full-text product search") {
     Scenario("Add product | Get projection | Full-text search") {
