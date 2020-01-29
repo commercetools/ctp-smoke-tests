@@ -5,6 +5,7 @@ import com.github.agourlay.cornichon.http.{HttpRequest, RootExtractor}
 import com.github.agourlay.cornichon.resolver.{JsonMapper, Mapper}
 import com.github.agourlay.cornichon.steps.regular.EffectStep
 import com.github.agourlay.cornichon.steps.wrapped.ScenarioResourceStep
+import scala.concurrent.duration._
 
 trait FeatureWithProduct extends FeatureWithToken {
   this: CornichonFeature with FeatureConfig =>
