@@ -5,11 +5,14 @@ import com.github.agourlay.cornichon.http.{HttpRequest, RootExtractor}
 import com.github.agourlay.cornichon.resolver.{JsonMapper, Mapper}
 import com.github.agourlay.cornichon.steps.regular.EffectStep
 import com.github.agourlay.cornichon.steps.wrapped.ScenarioResourceStep
+import scala.concurrent.duration._
 
 trait FeatureWithProduct extends FeatureWithToken {
   this: CornichonFeature with FeatureConfig =>
 
   override def registerExtractors: Map[String, Mapper] = FeatureWithProduct.extractors ++ AuthSteps.registerExtractors
+
+  override lazy val requestTimeout = 4.seconds
 
   lazy val baseUrlHttp = httpServiceByURL(s"$apiUrl" + s"/$projectKey")
 
