@@ -157,7 +157,6 @@ trait FeatureWithProduct extends FeatureWithToken {
               .post("/products")
               .withBody("""
                   |{
-                  |  "key" : "test_product",
                   |  "productType" : {
                   |    "id" : "<product-type-id>",
                   |    "typeId" : "product-type"
