@@ -11,7 +11,7 @@ class FindProductTest extends FeatureWithProduct {
       Given a newProduct
       Then  I getProductProjectionById
 
-      Eventually(maxDuration = 30.seconds, interval = 100.milliseconds){
+      Eventually(maxDuration = 60.seconds, interval = 100.milliseconds){
         When I fullTextProductSearch
         Then assert body.path("results[0].slug.en").is("<product-slug>")
       }
