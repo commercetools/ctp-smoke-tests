@@ -11,8 +11,10 @@ lazy val root = (project in file("."))
   .settings(
     name                 := "ctp-smoke-tests",
     libraryDependencies  ++= smokeTests,
+    testFrameworks += new TestFramework("com.github.agourlay.cornichon.framework.CornichonFramework"),
+    resolvers            += "Sonatype snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/",
     scalacOptions        += "-Xmacro-settings:materialize-derivations",
-    mainClass in Compile := Some("org.scalatest.tools.Runner"),
+    mainClass in Compile := Some("com.github.agourlay.cornichon.framework.MainRunner"),
 
     scriptClasspath ++= {
       fromClasspath((managedClasspath in Test).value, ".", _ => true).map(_._2) :+
@@ -28,12 +30,8 @@ lazy val root = (project in file("."))
 
     noPackageDoc,
     dockerCmd := Seq(
-      "-u",
-      "/tmp/test-results",
-      "-R",
-      s"lib/${(artifactPath in (Test, packageBin)).value.getName}",
-//      "-P", // tests in parallel: http://www.scalatest.org/user_guide/using_the_runner#executingSuitesInParallel
-      "-oDI" // standard output: D - show all durations, I - show reminder of failed and canceled tests without stack traces
+      "--packageToScan=cornichonTests",
+      "--reportsOutputDir=/target/test-reports"
     ),
     dockerPublishingSettings
   )
