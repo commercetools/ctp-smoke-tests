@@ -11,7 +11,7 @@ case class Config(
     apiUrl: String Refined Url,
     clientId: String,
     clientSecret: String,
-    projectKey: String,
+    projectKey: String
 )
 
 trait FeatureConfig {

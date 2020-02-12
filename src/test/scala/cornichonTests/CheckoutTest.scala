@@ -1,4 +1,5 @@
 package cornichonTests
+
 import com.github.agourlay.cornichon.CornichonFeature
 import com.github.agourlay.cornichon.core.FeatureDef
 import com.github.agourlay.cornichon.http.{HttpRequest, RootExtractor}
@@ -10,10 +11,10 @@ class CheckoutTest extends CornichonFeature with FeatureWithProduct {
     Scenario("Add custom line item | Create order") {
       Given a newTaxCategory
       Given a newCart
-      When  I addCustomLineItem
-      And   I createOrderFromCart
-      Then  I getCartById
-      And   I getOrderFromCart
+      When I addCustomLineItem
+      And I createOrderFromCart
+      Then I getCartById
+      And I getOrderFromCart
     }
   }
 

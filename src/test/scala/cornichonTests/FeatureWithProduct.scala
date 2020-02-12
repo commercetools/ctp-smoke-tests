@@ -403,8 +403,7 @@ trait FeatureWithProduct extends FeatureWithToken {
           effect = baseUrlHttp.requestEffect(
             request = HttpRequest
               .get("/product-projections/search")
-              .withParams(
-                "text.en" -> "<product-slug>"),
+              .withParams("text.en" -> "<product-slug>"),
             expectedStatus = Some(200)
           )
         )
