@@ -2,7 +2,7 @@ ThisBuild / scalaVersion     := "2.12.10"
 ThisBuild / version          := git.gitHeadCommit.value.getOrElse("1.0")
 ThisBuild / organization     := "com.commercetools"
 ThisBuild / organizationName := "commercetools"
-
+Test    / parallelExecution  := false
 import Dependencies._
 import NativePackagerHelper._
 
