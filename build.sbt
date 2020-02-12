@@ -1,4 +1,4 @@
-ThisBuild / scalaVersion     := "2.12.10"
+ThisBuild / scalaVersion     := "2.13.1"
 ThisBuild / version          := git.gitHeadCommit.value.getOrElse("1.0")
 ThisBuild / organization     := "com.commercetools"
 ThisBuild / organizationName := "commercetools"
