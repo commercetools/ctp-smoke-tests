@@ -1,4 +1,5 @@
 package cornichonTests
+
 import com.github.agourlay.cornichon.CornichonFeature
 import com.github.agourlay.cornichon.core.FeatureDef
 
@@ -10,11 +11,10 @@ class CheckoutExistProdTest extends CornichonFeature with FeatureWithProduct {
       Given a newProductType
       Given a newProduct
       Given a newCart
-      When  I addLineItem
-      And   I createOrderFromCart
-      And   I getOrderFromCart
-      And   I getCartById
+      When I addLineItem
+      And I createOrderFromCart
+      And I getOrderFromCart
+      And I getCartById
     }
   }
 }
-
