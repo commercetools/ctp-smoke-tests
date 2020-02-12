@@ -82,7 +82,7 @@ jobs:
       - restore_cache: *restore-sbt-cache
       - run:
           name: Smoke tests
-          command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean test docker:stage exit
+          command: sbt -Dfatal-warnings=true -Dscalac-optimize=true clean scalafmtCheckAll test docker:stage exit
       - run:
           name: Save test results
           command: |
