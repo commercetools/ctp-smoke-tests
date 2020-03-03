@@ -7,3 +7,4 @@ logs
 *.swp
 *~
 *.iml
+.circleci/test-reports
