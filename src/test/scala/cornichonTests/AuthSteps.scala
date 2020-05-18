@@ -17,20 +17,21 @@ trait AuthSteps {
   def WithToken =
     WithHeaders("Authorization" -> "Bearer <oauth-token>", "X-correlation-ID" -> "correlation-id")
 
-  def basic_auth_request = EffectStep(
-    title = "sending API auth request",
-    effect = { s =>
-      val effect = auth.requestEffect(
-        request = HttpRequest
-          .post("/oauth/token")
-          .withParams("grant_type" -> "client_credentials", "scope" -> s"manage_project:$projectKey")
-          .withHeaders("Authorization" -> basicAuthHeaders(clientId, clientSecret)),
-        extractor = RootExtractor("oauth-token-extract"),
-        expectedStatus = Some(200)
-      )
-      effect(s)
-    }
-  )
+  def basic_auth_request =
+    EffectStep(
+      title = "sending API auth request",
+      effect = { s =>
+        val effect = auth.requestEffect(
+          request = HttpRequest
+            .post("/oauth/token")
+            .withParams("grant_type" -> "client_credentials", "scope" -> s"manage_project:$projectKey")
+            .withHeaders("Authorization" -> basicAuthHeaders(clientId, clientSecret)),
+          extractor = RootExtractor("oauth-token-extract"),
+          expectedStatus = Some(200)
+        )
+        effect(s)
+      }
+    )
 }
 
 object AuthSteps {

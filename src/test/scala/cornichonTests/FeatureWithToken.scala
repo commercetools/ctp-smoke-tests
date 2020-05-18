@@ -18,15 +18,16 @@ trait FeatureWithToken extends CornichonFeature with FeatureConfig with AuthStep
   )
   override def registerExtractors: Map[String, Mapper] = super.registerExtractors ++ AuthSteps.registerExtractors
 
-  private def setupCorrelationIdHeader = EffectStep.fromSyncE(
-    title = "Header setup for X-Correlation-ID",
-    show = false,
-    effect = scenarioContext => {
-      val correlationId = s"${this.getClass.getName.replace(".", "_")}-${UUID.randomUUID().toString}".toLowerCase
-      for {
-        s1 <- scenarioContext.session.addValue("correlation-id", correlationId)
-        s2 <- addToWithHeaders("x-correlation-id", correlationId)(s1)
-      } yield s2
-    }
-  )
+  private def setupCorrelationIdHeader =
+    EffectStep.fromSyncE(
+      title = "Header setup for X-Correlation-ID",
+      show = false,
+      effect = scenarioContext => {
+        val correlationId = s"${this.getClass.getName.replace(".", "_")}-${UUID.randomUUID().toString}".toLowerCase
+        for {
+          s1 <- scenarioContext.session.addValue("correlation-id", correlationId)
+          s2 <- addToWithHeaders("x-correlation-id", correlationId)(s1)
+        } yield s2
+      }
+    )
 }
