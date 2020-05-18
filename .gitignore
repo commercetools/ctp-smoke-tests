@@ -8,3 +8,6 @@ logs
 *~
 *.iml
 .circleci/test-reports
+.bloop
+.metals
+metals.sbt
