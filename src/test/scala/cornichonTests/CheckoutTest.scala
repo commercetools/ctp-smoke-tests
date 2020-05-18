@@ -7,16 +7,17 @@ import com.github.agourlay.cornichon.steps.regular.EffectStep
 
 class CheckoutTest extends CornichonFeature with FeatureWithProduct {
 
-  def feature: FeatureDef = Feature("Checkout process with custom line item") {
-    Scenario("Add custom line item | Create order") {
-      Given a newTaxCategory
-      Given a newCart
-      When I addCustomLineItem
-      And I createOrderFromCart
-      Then I getCartById
-      And I getOrderFromCart
+  def feature: FeatureDef =
+    Feature("Checkout process with custom line item") {
+      Scenario("Add custom line item | Create order") {
+        Given a newTaxCategory
+        Given a newCart
+        When I addCustomLineItem
+        And I createOrderFromCart
+        Then I getCartById
+        And I getOrderFromCart
+      }
     }
-  }
 
   def addCustomLineItem =
     Attach {
