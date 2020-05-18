@@ -16,35 +16,40 @@ trait FeatureWithProduct extends FeatureWithToken {
 
   lazy val baseUrlHttp = httpServiceByURL(s"$apiUrl" + s"/$projectKey")
 
-  def newTaxCategory = ScenarioResourceStep(
-    title = "add new tax category",
-    acquire = addTaxCategory,
-    release = deleteTaxCategory
-  )
+  def newTaxCategory =
+    ScenarioResourceStep(
+      title = "add new tax category",
+      acquire = addTaxCategory,
+      release = deleteTaxCategory
+    )
 
-  def newProductType = ScenarioResourceStep(
-    title = "add new product type",
-    acquire = addProductType,
-    release = deleteProductType
-  )
+  def newProductType =
+    ScenarioResourceStep(
+      title = "add new product type",
+      acquire = addProductType,
+      release = deleteProductType
+    )
 
-  def newProduct = ScenarioResourceStep(
-    title = "add new product",
-    acquire = addProduct,
-    release = deleteProduct
-  )
+  def newProduct =
+    ScenarioResourceStep(
+      title = "add new product",
+      acquire = addProduct,
+      release = deleteProduct
+    )
 
-  def newCart = ScenarioResourceStep(
-    title = "add new cart",
-    acquire = createCart,
-    release = deleteCart
-  )
+  def newCart =
+    ScenarioResourceStep(
+      title = "add new cart",
+      acquire = createCart,
+      release = deleteCart
+    )
 
-  def createOrderFromCart = ScenarioResourceStep(
-    title = "create order from cart",
-    acquire = createOrder,
-    release = deleteOrder
-  )
+  def createOrderFromCart =
+    ScenarioResourceStep(
+      title = "create order from cart",
+      acquire = createOrder,
+      release = deleteOrder
+    )
 
   def queryTaxCategories =
     Attach {
