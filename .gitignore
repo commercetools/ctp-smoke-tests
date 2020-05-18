@@ -7,3 +7,6 @@ logs
 *.swp
 *~
 *.iml
+.bloop
+.metals
+metals.sbt
