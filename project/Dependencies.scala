@@ -7,5 +7,6 @@ object Dependencies {
       "eu.timepit"            %% "refined"                  % "0.9.15" ::
       "eu.timepit"            %% "refined-pureconfig"       % "0.9.15" ::
       "com.github.pureconfig" %% "pureconfig"               % "0.12.3" ::
+      "com.github.pureconfig" %% "pureconfig"               % "0.13.0" ::
       Nil map (_ % Test)
 }
