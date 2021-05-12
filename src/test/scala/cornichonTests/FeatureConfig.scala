@@ -15,10 +15,14 @@ case class Config(
 )
 
 trait FeatureConfig {
-  lazy val configuration: Config = ConfigSource.default.at("auth-test-vars").loadOrThrow[Config]
+  def configuration: Config = FeatureConfig.configuration
   lazy val clientId = configuration.clientId
   lazy val clientSecret = configuration.clientSecret
   lazy val authUrl = configuration.authUrl.value
   lazy val apiUrl = configuration.apiUrl.value
   lazy val projectKey = configuration.projectKey
+}
+
+object FeatureConfig {
+  lazy val configuration: Config = ConfigSource.default.at("auth-test-vars").loadOrThrow[Config]
 }
