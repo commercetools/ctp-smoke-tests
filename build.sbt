@@ -2,7 +2,7 @@ ThisBuild / scalaVersion     := "2.13.5"
 ThisBuild / version          := git.gitHeadCommit.value.getOrElse("1.0")
 ThisBuild / organization     := "com.commercetools"
 ThisBuild / organizationName := "commercetools"
-Test    / parallelExecution  := false
+Test / parallelExecution     := false
 import Dependencies._
 import NativePackagerHelper._
 
@@ -10,23 +10,20 @@ lazy val root = (project in file("."))
   .enablePlugins(JavaAppPackaging, DockerPlugin)
   .settings(
     name                 := "ctp-smoke-tests",
-    libraryDependencies  ++= smokeTests,
-    testFrameworks += new TestFramework("com.github.agourlay.cornichon.framework.CornichonFramework"),
+    libraryDependencies ++= smokeTests,
+    testFrameworks       += new TestFramework("com.github.agourlay.cornichon.framework.CornichonFramework"),
     scalacOptions        += "-Xmacro-settings:materialize-derivations",
-    mainClass in Compile := Some("com.github.agourlay.cornichon.framework.MainRunner"),
-
+    Compile / mainClass  := Some("com.github.agourlay.cornichon.framework.MainRunner"),
     scriptClasspath ++= {
-      fromClasspath((managedClasspath in Test).value, ".", _ => true).map(_._2) :+
-        (sbt.Keys.`package` in Test).value.getName
+      fromClasspath((Test / managedClasspath).value, ".", _ => true).map(_._2) :+
+        (Test / sbt.Keys.`package`).value.getName
     },
-
-    mappings in Universal ++= {
-      val testJar = (sbt.Keys.`package` in Test).value
+    Universal / mappings ++= {
+      val testJar = (Test / sbt.Keys.`package`).value
       val func = testJar -> s"lib/${testJar.getName}"
-      fromClasspath((managedClasspath in Test).value, "lib", _ => true) :+
+      fromClasspath((Test / managedClasspath).value, "lib", _ => true) :+
         (testJar -> s"lib/${testJar.getName}")
     },
-
     noPackageDoc,
     dockerCmd := Seq(
       "--packageToScan=cornichonTests",
@@ -36,11 +33,11 @@ lazy val root = (project in file("."))
   )
 
 //skip javadoc.jar build for performance
-lazy val noPackageDoc = Seq(mappings in (Compile, packageDoc) := Seq())
+lazy val noPackageDoc = Seq(Compile / mappings := Seq(), packageDoc / mappings := Seq())
 
 // docker publishing to public repo: https://console.cloud.google.com/gcr/images/ct-images
 // needs a docker login to the GCE container registry first
 lazy val dockerPublishingSettings = Seq(
-  dockerRepository     := Some("gcr.io/ct-images"),
-  dockerUpdateLatest   := true
+  dockerRepository   := Some("gcr.io/ct-images"),
+  dockerUpdateLatest := true
 )
