@@ -420,17 +420,17 @@ trait FeatureWithProduct extends FeatureWithToken {
 object FeatureWithProduct {
 
   val extractors = Map(
-    "tax-category-id"      -> JsonMapper("tax-category", "id"),
+    "tax-category-id" -> JsonMapper("tax-category", "id"),
     "tax-category-version" -> JsonMapper("tax-category", "version"),
-    "product-type-id"      -> JsonMapper("product-type", "id"),
+    "product-type-id" -> JsonMapper("product-type", "id"),
     "product-type-version" -> JsonMapper("product-type", "version"),
-    "product-id"           -> JsonMapper("product", "id"),
-    "product-version"      -> JsonMapper("product", "version"),
-    "product-slug"         -> JsonMapper("product", "masterData.current.slug.en"),
-    "product-sku"          -> JsonMapper("product", "masterData.current.masterVariant.sku"),
-    "cart-id"              -> JsonMapper("cart", "id"),
-    "cart-version"         -> JsonMapper("cart", "version"),
-    "order-id"             -> JsonMapper("order", "id"),
-    "order-version"        -> JsonMapper("order", "version")
+    "product-id" -> JsonMapper("product", "id"),
+    "product-version" -> JsonMapper("product", "version"),
+    "product-slug" -> JsonMapper("product", "masterData.current.slug.en"),
+    "product-sku" -> JsonMapper("product", "masterData.current.masterVariant.sku"),
+    "cart-id" -> JsonMapper("cart", "id"),
+    "cart-version" -> JsonMapper("cart", "version"),
+    "order-id" -> JsonMapper("order", "id"),
+    "order-version" -> JsonMapper("order", "version")
   )
 }
