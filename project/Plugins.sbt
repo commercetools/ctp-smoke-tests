@@ -6,4 +6,3 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-git" % "1.0.1")
 
 // https://github.com/scalameta/scalafmt/releases
 addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.4.3")
-
