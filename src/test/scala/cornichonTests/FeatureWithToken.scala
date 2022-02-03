@@ -2,8 +2,6 @@ package cornichonTests
 
 import java.util.UUID
 
-import cats.effect.syntax.effect
-import cats.syntax.show
 import com.github.agourlay.cornichon.CornichonFeature
 import com.github.agourlay.cornichon.resolver.Mapper
 import com.github.agourlay.cornichon.steps.regular.EffectStep
