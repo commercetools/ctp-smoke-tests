@@ -17,7 +17,7 @@ $ PROJECT_KEY=<project key>
 Run the smoke tests as docker container:
 
 ```
-$ docker run -it --rm -e AUTH_URL -e API_URL -e CLIENT_ID -e CLIENT_SECRET -e PROJECT_KEY gcr.io/ct-images/ctp-smoke-tests:master
+$ docker run -it --rm -e AUTH_URL -e API_URL -e CLIENT_ID -e CLIENT_SECRET -e PROJECT_KEY gcr.io/ct-images/ctp-smoke-tests:main
 ```
 
 ## Docker set up (sbt-native-packager)
@@ -59,4 +59,3 @@ $ sbt docker:publish
 * [Refined](https://github.com/fthomas/refined)
 * [Pureconfig](https://github.com/pureconfig/pureconfig/)
 * [SBT Native Packager](https://www.scala-sbt.org/sbt-native-packager/index.html)
-
