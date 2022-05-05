@@ -41,5 +41,5 @@ lazy val noPackageDoc = Seq(Compile / mappings := Seq(), packageDoc / mappings :
 lazy val dockerPublishingSettings = Seq(
   dockerBaseImage := "eclipse-temurin:17.0.3_7-jre-focal",
   dockerRepository := Some("gcr.io/ct-images"),
-  dockerUpdateLatest := true
+  dockerUpdateLatest := false
 )
