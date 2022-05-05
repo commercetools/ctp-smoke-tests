@@ -69,7 +69,7 @@ commands:
             set -e
             cd << parameters.path >>
             # The tag "latest" will always contain the last build artifacts
-            docker build -t gcr.io/ct-images/<< parameters.container_name >>:${CIRCLE_SHA1} -t gcr.io/ct-images/<< parameters.container_name >>:${DOCKER_TAG_NAME} .
+            docker build -t gcr.io/ct-images/<< parameters.container_name >>:${CIRCLE_SHA1} -t gcr.io/ct-images/<< parameters.container_name >>:${DOCKER_TAG_NAME} -t gcr.io/ct-images/<< parameters.container_name >>:latest .
             docker push gcr.io/ct-images/<< parameters.container_name >>
 
 
@@ -120,4 +120,3 @@ workflows:
       - push_docker_image:
           requires:
             - smoke_tests
-
