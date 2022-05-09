@@ -74,7 +74,7 @@ trait FeatureWithProduct extends FeatureWithToken {
               .post("/tax-categories")
               .withBody("""
                   |{
-                  |  "name" : "test-tax-category-<global-unique-number>",
+                  |  "name" : "test-tax-category-<random-uuid>",
                   |  "rates" : [ {
                   |    "name" : "test-tax-category",
                   |    "amount" : 0.2,
