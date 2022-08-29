@@ -1,5 +1,5 @@
 // https://github.com/sbt/sbt-native-packager
-addSbtPlugin("com.github.sbt" % "sbt-native-packager" % "1.9.9")
+addSbtPlugin("com.github.sbt" % "sbt-native-packager" % "1.9.11")
 
 // https://github.com/sbt/sbt-git
 addSbtPlugin("com.github.sbt" % "sbt-git" % "2.0.0")
