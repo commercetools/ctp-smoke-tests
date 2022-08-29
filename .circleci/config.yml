@@ -70,7 +70,7 @@ commands:
             cd << parameters.path >>
             # The tag "latest" will always contain the last build artifacts
             docker build -t gcr.io/ct-images/<< parameters.container_name >>:${CIRCLE_SHA1} -t gcr.io/ct-images/<< parameters.container_name >>:${DOCKER_TAG_NAME} -t gcr.io/ct-images/<< parameters.container_name >>:latest .
-            docker push --all-tags gcr.io/ct-images/<< parameters.container_name >>
+            docker push gcr.io/ct-images/<< parameters.container_name >>
 
 
 jobs:

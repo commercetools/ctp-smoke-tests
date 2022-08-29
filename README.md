@@ -34,11 +34,13 @@ We publish images to the [public CTP docker registry on google cloud](https://co
 
 #### Automatic publishing
 
-The CI pipeline automatically publishes a docker image for each PR and for master.
+The CI pipeline automatically publishes a docker image for each PR and for `main`.
 
 Docker images are tagged with the git commit and the git branch.
 
-The CI pipeline uses [this account](https://github.com/commercetools/ops-terraform/blob/master/ct-images/users-manager/service-accounts/ctp_smoke_tests.tf).
+The CI pipeline uses:
+- [this account](https://github.com/commercetools/ops-terraform/blob/master/ct-images/users-manager/service-accounts/ctp_smoke_tests.tf).
+- [this project](https://monster.sso.europe-west1.gcp.commercetools.com/v1/#/projects/smoke_tests_project).
 
 #### Manually publish an image
 
