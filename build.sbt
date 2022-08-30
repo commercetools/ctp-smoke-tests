@@ -39,7 +39,8 @@ lazy val noPackageDoc = Seq(Compile / mappings := Seq(), packageDoc / mappings :
 // docker publishing to public repo: https://console.cloud.google.com/gcr/images/ct-images
 // needs a docker login to the GCE container registry first
 lazy val dockerPublishingSettings = Seq(
-  dockerBaseImage := "eclipse-temurin:17.0.3_7-jre-focal",
+  // https://hub.docker.com/_/eclipse-temurin/
+  dockerBaseImage := "eclipse-temurin:18.0.2.1_1-jre-jammy",
   dockerRepository := Some("gcr.io/ct-images"),
   dockerUpdateLatest := false
 )
