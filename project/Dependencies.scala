@@ -4,8 +4,8 @@ object Dependencies {
 
   lazy val smokeTests =
     "com.github.agourlay" %% "cornichon-test-framework" % "0.20.3" ::
-      "eu.timepit" %% "refined" % "0.9.29" ::
-      "eu.timepit" %% "refined-pureconfig" % "0.9.29" ::
+      "eu.timepit" %% "refined" % "0.10.1" ::
+      "eu.timepit" %% "refined-pureconfig" % "0.10.1" ::
       "com.github.pureconfig" %% "pureconfig" % "0.17.1" ::
       "com.github.pureconfig" %% "pureconfig" % "0.17.1" ::
       Nil map (_ % Test)
