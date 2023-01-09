@@ -40,7 +40,7 @@ Docker images are tagged with the git commit and the git branch.
 
 The CI pipeline uses:
 - [this account](https://github.com/commercetools/ops-terraform/blob/master/ct-images/users-manager/service-accounts/ctp_smoke_tests.tf).
-- [this project](https://monster.sso.europe-west1.gcp.commercetools.com/v1/#/projects/smoke_tests_project).
+- [the project `ctp-smoke-tests`](https://monster.sso.europe-west1.gcp.commercetools.com/v1/#/projects/ctp-smoke-tests).
 
 #### Manually publish an image
 
