@@ -6,6 +6,6 @@ object Dependencies {
     "com.github.agourlay" %% "cornichon-test-framework" % "0.21.1" ::
       "eu.timepit" %% "refined" % "0.11.0" ::
       "eu.timepit" %% "refined-pureconfig" % "0.11.0" ::
-      "com.github.pureconfig" %% "pureconfig" % "0.17.4" ::
+      "com.github.pureconfig" %% "pureconfig" % "0.17.5" ::
       Nil map (_ % Test)
 }
