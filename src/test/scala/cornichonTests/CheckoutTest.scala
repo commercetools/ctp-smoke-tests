@@ -25,8 +25,7 @@ class CheckoutTest extends CornichonFeature with FeatureWithProduct {
         EffectStep(
           title = "adding custom line item",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest
-              .post("/carts/<cart-id>")
+            request = post("/carts/<cart-id>")
               .withBody("""
                   |{
                   |   "version" : <cart-version>,

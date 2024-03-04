@@ -57,7 +57,7 @@ trait FeatureWithProduct extends FeatureWithToken {
         EffectStep(
           title = "query tax cats",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest.get("/tax-categories"),
+            request = get("/tax-categories"),
             expectedStatus = Some(200)
           )
         )
@@ -70,8 +70,7 @@ trait FeatureWithProduct extends FeatureWithToken {
         EffectStep(
           title = "create tax category",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest
-              .post("/tax-categories")
+            request = post("/tax-categories")
               .withBody("""
                   |{
                   |  "name" : "test-tax-category-<random-uuid>",
@@ -96,8 +95,7 @@ trait FeatureWithProduct extends FeatureWithToken {
         EffectStep(
           title = "deleting tax category",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest
-              .delete(s"/tax-categories/<tax-category-id>")
+            request = delete(s"/tax-categories/<tax-category-id>")
               .withParams("version" -> s"<tax-category-version>"),
             expectedStatus = Some(200)
           )
@@ -111,8 +109,7 @@ trait FeatureWithProduct extends FeatureWithToken {
         EffectStep(
           title = "adding type category",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest
-              .post("/product-types")
+            request = post("/product-types")
               .withBody("""
                     |{
                     |    "name": "test_product_type",
@@ -146,8 +143,7 @@ trait FeatureWithProduct extends FeatureWithToken {
         EffectStep(
           title = "deleting product type",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest
-              .delete(s"/product-types/<product-type-id>")
+            request = delete(s"/product-types/<product-type-id>")
               .withParams("version" -> s"<product-type-version>"),
             expectedStatus = Some(200)
           )
@@ -161,8 +157,7 @@ trait FeatureWithProduct extends FeatureWithToken {
         EffectStep(
           title = "adding product",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest
-              .post("/products")
+            request = post("/products")
               .withBody("""
                   |{
                   |  "productType" : {
@@ -207,8 +202,7 @@ trait FeatureWithProduct extends FeatureWithToken {
         EffectStep(
           title = "unpublishing product",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest
-              .post(s"/products/<product-id>")
+            request = post(s"/products/<product-id>")
               .withBody("""
                   |{
                   |   "version": <product-version>,
@@ -232,8 +226,7 @@ trait FeatureWithProduct extends FeatureWithToken {
         EffectStep(
           title = "deleting product",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest
-              .delete(s"/products/<product-id>")
+            request = delete(s"/products/<product-id>")
               .withParams("version" -> s"<product-version>"),
             expectedStatus = Some(200)
           )
@@ -253,8 +246,7 @@ trait FeatureWithProduct extends FeatureWithToken {
         EffectStep(
           title = "create cart",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest
-              .post("/carts")
+            request = post("/carts")
               .withBody("""
                   |{
                   |  "currency" : "EUR",
@@ -276,8 +268,7 @@ trait FeatureWithProduct extends FeatureWithToken {
         EffectStep(
           title = "deleting cart",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest
-              .delete(s"/carts/<cart-id>")
+            request = delete(s"/carts/<cart-id>")
               .withParams("version" -> s"<cart-version>"),
             expectedStatus = Some(200)
           )
@@ -291,8 +282,7 @@ trait FeatureWithProduct extends FeatureWithToken {
         EffectStep(
           title = "adding line item",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest
-              .post("/carts/<cart-id>")
+            request = post("/carts/<cart-id>")
               .withBody("""
                   |{
                   |   "version": <cart-version>,
@@ -329,8 +319,7 @@ trait FeatureWithProduct extends FeatureWithToken {
         EffectStep(
           title = "create order",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest
-              .post("/orders")
+            request = post("/orders")
               .withBody("""
                 |{
                 |   "id" : "<cart-id>",
@@ -350,8 +339,7 @@ trait FeatureWithProduct extends FeatureWithToken {
         EffectStep(
           title = "delete order",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest
-              .delete("/orders/<order-id>")
+            request = delete("/orders/<order-id>")
               .withParams("version" -> "<order-version>"),
             expectedStatus = Some(200)
           )
@@ -365,7 +353,7 @@ trait FeatureWithProduct extends FeatureWithToken {
         EffectStep(
           title = "query order by id",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest.get("/orders/<order-id>"),
+            request = get("/orders/<order-id>"),
             expectedStatus = Some(200)
           )
         )
@@ -378,7 +366,7 @@ trait FeatureWithProduct extends FeatureWithToken {
         EffectStep(
           title = "query cart by id",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest.get("/carts/<cart-id>"),
+            request = get("/carts/<cart-id>"),
             extractor = RootExtractor("cart"),
             expectedStatus = Some(200)
           )
@@ -392,8 +380,7 @@ trait FeatureWithProduct extends FeatureWithToken {
         EffectStep(
           title = "product projection by product ID",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest
-              .get("/product-projections/<product-id>"),
+            request = get("/product-projections/<product-id>"),
             expectedStatus = Some(200)
           )
         )
@@ -406,8 +393,7 @@ trait FeatureWithProduct extends FeatureWithToken {
         EffectStep(
           title = "full-text product projection",
           effect = baseUrlHttp.requestEffect(
-            request = HttpRequest
-              .get("/product-projections/search")
+            request = get("/product-projections/search")
               .withParams("text.en" -> "<product-slug>"),
             expectedStatus = Some(200)
           )
